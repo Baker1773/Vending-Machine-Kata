@@ -64,7 +64,13 @@ public class VendingMachine {
 	}
 
 	public void pressReturnCoinButton() {
-		coinReturn.putAll(insertedCoins);
+		for (Coin c : insertedCoins.keySet()) {
+			if (coinReturn.containsKey(c))
+				coinReturn.put(c, insertedCoins.get(c) + coinReturn.get(c));
+			else
+				coinReturn.put(c, insertedCoins.get(c));
+		}
+		insertedCoins.clear();
 		amount = 0;
 	}
 
