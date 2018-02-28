@@ -65,6 +65,7 @@ public class VendingMachine {
 
 	public void pressReturnCoinButton() {
 		coinReturn.putAll(insertedCoins);
+		amount = 0;
 	}
 
 }

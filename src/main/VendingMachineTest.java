@@ -168,4 +168,12 @@ public class VendingMachineTest {
 		assertEquals(1, (int) coinsReturned.get(Coin.NICKEL));
 		assertEquals(2, (int) coinsReturned.get(Coin.PENNY));
 	}
+
+	@Test
+	public void insertingAQuarterThenPressingTheReturnButtonWillResetTheDisplay() {
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.pressReturnCoinButton();
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+	}
 }
