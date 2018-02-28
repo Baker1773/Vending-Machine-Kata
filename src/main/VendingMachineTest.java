@@ -75,4 +75,14 @@ public class VendingMachineTest {
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 	}
 
+	@Test
+	public void vendingMachineDoesNotAcceptPennyWhenOtherCoinsAreInserted() {
+
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.QUARTER);
+		assertEquals("0.25", vendingMachine.getDisplay());
+		vendingMachine.insertCoin(Coin.PENNY);
+		assertEquals("0.25", vendingMachine.getDisplay());
+	}
+
 }
