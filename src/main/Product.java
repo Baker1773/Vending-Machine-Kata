@@ -1,6 +1,6 @@
 package main;
 
 public enum Product {
-	COLA, CHIPS
+	COLA, CHIPS, CANDY
 
 }

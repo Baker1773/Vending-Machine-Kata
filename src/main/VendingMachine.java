@@ -11,6 +11,7 @@ public class VendingMachine {
 
 	boolean pressedCola;
 	boolean pressedChips;
+	boolean pressedCandy;
 
 	public VendingMachine() {
 		amount = 0;
@@ -28,6 +29,10 @@ public class VendingMachine {
 		if (pressedChips) {
 			pressedChips = false;
 			return "PRICE $0.50";
+		}
+
+		if (pressedCandy) {
+			return "PRICE $0.65";
 		}
 
 		if (amount != 0)
@@ -90,7 +95,10 @@ public class VendingMachine {
 
 	public void selectProduct(Product product) {
 
-		if (product == Product.COLA)
+		if (product == Product.CANDY)
+			pressedCandy = true;
+
+		else if (product == Product.COLA)
 			pressedCola = true;
 		else
 			pressedChips = true;
