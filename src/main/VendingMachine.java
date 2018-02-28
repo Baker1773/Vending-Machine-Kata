@@ -18,8 +18,10 @@ public class VendingMachine {
 	}
 
 	public String getDisplay() {
-		if (pressedCola)
+		if (pressedCola) {
+			pressedCola = false;
 			return "PRICE $1.00";
+		}
 
 		if (amount != 0)
 			return String.format("%.2f", amount);

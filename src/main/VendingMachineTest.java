@@ -222,4 +222,13 @@ public class VendingMachineTest {
 		vendingMachine.selectProduct(Product.COLA);
 		assertEquals("PRICE $1.00", vendingMachine.getDisplay());
 	}
+
+	@Test
+	public void checkingTheDisplayAfterThePriceForColaIsDisplayedWillDisplayInsertCoin() {
+		VendingMachine vendingMachine = new VendingMachine();
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+		vendingMachine.selectProduct(Product.COLA);
+		assertEquals("PRICE $1.00", vendingMachine.getDisplay());
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+	}
 }
