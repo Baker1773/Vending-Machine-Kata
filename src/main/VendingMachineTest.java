@@ -122,4 +122,14 @@ public class VendingMachineTest {
 		assertEquals(0, coinsReturned.size());
 	}
 
+	@Test
+	public void insertingAQuarterThenPressingTheReturnButtonWillReturnAQuarter() {
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.pressReturnCoinButton();
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
+		assertEquals(1, coinsReturned.size());
+		assertEquals(1, (int) coinsReturned.get(Coin.QUARTER));
+	}
+
 }

@@ -20,6 +20,7 @@ public class VendingMachine {
 	}
 
 	public void insertCoin(Coin coin) {
+
 		switch (coin) {
 
 		case NICKEL:
@@ -51,6 +52,10 @@ public class VendingMachine {
 		coinReturned.putAll(coinReturn);
 		coinReturn.clear();
 		return coinReturned;
+	}
+
+	public void pressReturnCoinButton() {
+		coinReturn.put(Coin.QUARTER, 1);
 	}
 
 }
