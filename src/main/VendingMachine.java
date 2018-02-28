@@ -9,31 +9,19 @@ public class VendingMachine {
 	private Map<Coin, Integer> coinReturn;
 	private Map<Coin, Integer> insertedCoins;
 
-	boolean pressedCola;
-	boolean pressedChips;
-	boolean pressedCandy;
+	boolean productPressed;
+	double productPrice;
 
 	public VendingMachine() {
 		amount = 0;
 		coinReturn = new TreeMap<Coin, Integer>();
 		insertedCoins = new TreeMap<Coin, Integer>();
-		pressedCola = false;
 	}
 
 	public String getDisplay() {
-		if (pressedCola) {
-			pressedCola = false;
-			return "PRICE $1.00";
-		}
-
-		if (pressedChips) {
-			pressedChips = false;
-			return "PRICE $0.50";
-		}
-
-		if (pressedCandy) {
-			pressedCandy = false;
-			return "PRICE $0.65";
+		if (productPressed) {
+			productPressed = false;
+			return "PRICE $" + String.format("%.2f", productPrice);
 		}
 
 		if (amount != 0)
@@ -95,15 +83,23 @@ public class VendingMachine {
 	}
 
 	public void selectProduct(Product product) {
+		productPressed = true;
+		switch (product) {
+		case CANDY:
+			productPrice = 0.65;
+			break;
 
-		if (product == Product.CANDY)
-			pressedCandy = true;
+		case COLA:
+			productPrice = 1;
+			break;
 
-		else if (product == Product.COLA)
-			pressedCola = true;
-		else
-			pressedChips = true;
+		case CHIPS:
+			productPrice = 0.5;
+			break;
 
+		default:
+			break;
+		}
 	}
 
 }
