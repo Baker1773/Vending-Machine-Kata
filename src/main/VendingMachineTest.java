@@ -57,4 +57,14 @@ public class VendingMachineTest {
 		assertEquals("0.10", vendingMachine.getDisplay());
 	}
 
+	@Test
+	public void vendingMachineAcceptsMultipleQuartersByDisplayingCurrentAmount() {
+
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.QUARTER);
+		assertEquals("0.25", vendingMachine.getDisplay());
+		vendingMachine.insertCoin(Coin.QUARTER);
+		assertEquals("0.50", vendingMachine.getDisplay());
+	}
+
 }

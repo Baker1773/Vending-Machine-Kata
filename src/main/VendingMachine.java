@@ -12,7 +12,7 @@ public class VendingMachine {
 
 	public void insertCoin(Coin coin) {
 		if (coin.QUARTER == coin)
-			amount = 0.25;
+			amount += 0.25;
 		else if (Coin.DIME == coin)
 			amount += 0.10;
 		else
