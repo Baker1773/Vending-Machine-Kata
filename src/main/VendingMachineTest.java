@@ -91,7 +91,7 @@ public class VendingMachineTest {
 	public void whenAPennyIsRejectedItIsPlacedInTheCoinReturn() {
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.insertCoin(Coin.PENNY);
-		Map<Coin, Integer> coinsReturned = vendingMachine.checkCoinReturn();
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
 		assertEquals(1, (int) coinsReturned.get(Coin.PENNY));
 	}
 
@@ -100,14 +100,14 @@ public class VendingMachineTest {
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.insertCoin(Coin.PENNY);
 		vendingMachine.insertCoin(Coin.PENNY);
-		Map<Coin, Integer> coinsReturned = vendingMachine.checkCoinReturn();
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
 		assertEquals(2, (int) coinsReturned.get(Coin.PENNY));
 	}
 
 	@Test
 	public void newVendingMachinesWillHaveAnEmptyCoinReturn() {
 		VendingMachine vendingMachine = new VendingMachine();
-		Map<Coin, Integer> coinsReturned = vendingMachine.checkCoinReturn();
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
 		assertEquals(0, coinsReturned.size());
 	}
 
@@ -116,9 +116,9 @@ public class VendingMachineTest {
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.insertCoin(Coin.PENNY);
 		vendingMachine.insertCoin(Coin.PENNY);
-		Map<Coin, Integer> coinsReturned = vendingMachine.checkCoinReturn();
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
 		assertEquals(2, (int) coinsReturned.get(Coin.PENNY));
-		coinsReturned = vendingMachine.checkCoinReturn();
+		coinsReturned = vendingMachine.emptyCoinReturn();
 		assertEquals(0, coinsReturned.size());
 	}
 

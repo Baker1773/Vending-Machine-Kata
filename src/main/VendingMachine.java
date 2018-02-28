@@ -46,7 +46,7 @@ public class VendingMachine {
 		}
 	}
 
-	public Map<Coin, Integer> checkCoinReturn() {
+	public Map<Coin, Integer> emptyCoinReturn() {
 		Map<Coin, Integer> coinReturned = new TreeMap<Coin, Integer>();
 		coinReturned.putAll(coinReturn);
 		coinReturn.clear();
