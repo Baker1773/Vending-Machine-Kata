@@ -47,4 +47,14 @@ public class VendingMachineTest {
 		assertEquals("0.20", vendingMachine.getDisplay());
 	}
 
+	@Test
+	public void vendingMachineAcceptsMultipleNickelsByDisplayingCurrentAmount() {
+
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.NICKEL);
+		assertEquals("0.05", vendingMachine.getDisplay());
+		vendingMachine.insertCoin(Coin.NICKEL);
+		assertEquals("0.10", vendingMachine.getDisplay());
+	}
+
 }
