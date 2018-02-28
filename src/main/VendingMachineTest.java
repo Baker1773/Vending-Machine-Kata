@@ -275,4 +275,16 @@ public class VendingMachineTest {
 		assertEquals("PRICE $0.65", vendingMachine.getDisplay());
 		assertEquals("0.25", vendingMachine.getDisplay());
 	}
+
+	@Test
+	public void pressingColaWithExactChangeWillResultInTheDisplaySayingThankYou() {
+		VendingMachine vendingMachine = new VendingMachine();
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.selectProduct(Product.COLA);
+		assertEquals("THANK YOU", vendingMachine.getDisplay());
+	}
 }

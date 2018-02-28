@@ -11,6 +11,7 @@ public class VendingMachine {
 
 	boolean productPressed;
 	double productPrice;
+	boolean productPurchased;
 
 	public VendingMachine() {
 		amount = 0;
@@ -19,6 +20,9 @@ public class VendingMachine {
 	}
 
 	public String getDisplay() {
+		if (productPurchased)
+			return "THANK YOU";
+
 		if (productPressed) {
 			productPressed = false;
 			return "PRICE $" + String.format("%.2f", productPrice);
@@ -90,6 +94,8 @@ public class VendingMachine {
 			break;
 
 		case COLA:
+			if (amount == 1)
+				productPurchased = true;
 			productPrice = 1;
 			break;
 
