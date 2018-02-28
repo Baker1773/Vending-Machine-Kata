@@ -214,4 +214,12 @@ public class VendingMachineTest {
 		assertEquals(1, coinsReturned.size());
 		assertEquals(1, (int) coinsReturned.get(Coin.QUARTER));
 	}
+
+	@Test
+	public void selectColaWithNoMoneyInTheVendingMachineWillDisplayThePrice() {
+		VendingMachine vendingMachine = new VendingMachine();
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+		vendingMachine.selectProduct(Product.COLA);
+		assertEquals("PRICE $1.00", vendingMachine.getDisplay());
+	}
 }

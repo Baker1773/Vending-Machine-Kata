@@ -8,14 +8,19 @@ public class VendingMachine {
 	private double amount;
 	private Map<Coin, Integer> coinReturn;
 	private Map<Coin, Integer> insertedCoins;
+	boolean pressedCola;
 
 	public VendingMachine() {
 		amount = 0;
 		coinReturn = new TreeMap<Coin, Integer>();
 		insertedCoins = new TreeMap<Coin, Integer>();
+		pressedCola = false;
 	}
 
 	public String getDisplay() {
+		if (pressedCola)
+			return "PRICE $1.00";
+
 		if (amount != 0)
 			return String.format("%.2f", amount);
 		return "INSERT COIN";
@@ -72,6 +77,11 @@ public class VendingMachine {
 		}
 		insertedCoins.clear();
 		amount = 0;
+	}
+
+	public void selectProduct(Product product) {
+		pressedCola = true;
+
 	}
 
 }
