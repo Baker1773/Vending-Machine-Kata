@@ -8,7 +8,9 @@ public class VendingMachine {
 	private double amount;
 	private Map<Coin, Integer> coinReturn;
 	private Map<Coin, Integer> insertedCoins;
+
 	boolean pressedCola;
+	boolean pressedChips;
 
 	public VendingMachine() {
 		amount = 0;
@@ -21,6 +23,10 @@ public class VendingMachine {
 		if (pressedCola) {
 			pressedCola = false;
 			return "PRICE $1.00";
+		}
+
+		if (pressedChips) {
+			return "PRICE $0.50";
 		}
 
 		if (amount != 0)
@@ -82,7 +88,11 @@ public class VendingMachine {
 	}
 
 	public void selectProduct(Product product) {
-		pressedCola = true;
+
+		if (product == Product.COLA)
+			pressedCola = true;
+		else
+			pressedChips = true;
 
 	}
 
