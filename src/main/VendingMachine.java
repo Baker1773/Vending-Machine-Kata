@@ -14,7 +14,7 @@ public class VendingMachine {
 		if (coin.QUARTER == coin)
 			amount = 0.25;
 		else if (Coin.DIME == coin)
-			amount = 0.10;
+			amount += 0.10;
 		else
 			amount += 0.05;
 	}
