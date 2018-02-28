@@ -15,7 +15,7 @@ public class VendingMachine {
 			amount += 0.25;
 		else if (Coin.DIME == coin)
 			amount += 0.10;
-		else
+		else if (Coin.NICKEL == coin)
 			amount += 0.05;
 	}
 
