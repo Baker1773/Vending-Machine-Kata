@@ -187,4 +187,16 @@ public class VendingMachineTest {
 		assertEquals(1, coinsReturned.size());
 		assertEquals(1, (int) coinsReturned.get(Coin.QUARTER));
 	}
+
+	@Test
+	public void insertingAQuarterPressingReturnAndInsertertingAnotherQuarterAndPressingReturnWillResultInTwoQuartersInTheCoinReturn() {
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.pressReturnCoinButton();
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.pressReturnCoinButton();
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
+		assertEquals(1, coinsReturned.size());
+		assertEquals(2, (int) coinsReturned.get(Coin.QUARTER));
+	}
 }
