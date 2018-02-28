@@ -26,6 +26,7 @@ public class VendingMachine {
 		}
 
 		if (pressedChips) {
+			pressedChips = false;
 			return "PRICE $0.50";
 		}
 
