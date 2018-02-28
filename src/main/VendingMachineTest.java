@@ -21,4 +21,12 @@ public class VendingMachineTest {
 		assertEquals("0.05", vendingMachine.getDisplay());
 	}
 
+	@Test
+	public void vendingMachineAcceptsDimeByDisplayingCurrentAmount() {
+
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.DIME);
+		assertEquals("0.10", vendingMachine.getDisplay());
+	}
+
 }

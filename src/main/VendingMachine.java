@@ -6,12 +6,15 @@ public class VendingMachine {
 
 	public String getDisplay() {
 		if (amount != 0)
-			return amount + "";
+			return String.format("%.2f", amount);
 		return "INSERT COIN";
 	}
 
 	public void insertCoin(Coin coin) {
-		amount += 0.05;
+		if (Coin.DIME == coin)
+			amount = 0.10;
+		else
+			amount += 0.05;
 	}
 
 }
