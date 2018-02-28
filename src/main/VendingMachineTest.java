@@ -265,4 +265,14 @@ public class VendingMachineTest {
 		assertEquals("PRICE $0.65", vendingMachine.getDisplay());
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 	}
+
+	@Test
+	public void checkingTheDisplayWithSomeMoneyButInsufficientMoneyForAProduct() {
+		VendingMachine vendingMachine = new VendingMachine();
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.selectProduct(Product.CANDY);
+		assertEquals("PRICE $0.65", vendingMachine.getDisplay());
+		assertEquals("0.25", vendingMachine.getDisplay());
+	}
 }
