@@ -148,4 +148,24 @@ public class VendingMachineTest {
 		assertEquals(3, (int) coinsReturned.get(Coin.DIME));
 		assertEquals(1, (int) coinsReturned.get(Coin.NICKEL));
 	}
+
+	@Test
+	public void coinsReturnedFromCoinReturnButtonWillCombineWithRejectedPennies() {
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.NICKEL);
+		vendingMachine.insertCoin(Coin.PENNY);
+		vendingMachine.insertCoin(Coin.PENNY);
+		vendingMachine.pressReturnCoinButton();
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
+		assertEquals(4, coinsReturned.size());
+		assertEquals(2, (int) coinsReturned.get(Coin.QUARTER));
+		assertEquals(3, (int) coinsReturned.get(Coin.DIME));
+		assertEquals(1, (int) coinsReturned.get(Coin.NICKEL));
+		assertEquals(2, (int) coinsReturned.get(Coin.PENNY));
+	}
 }
