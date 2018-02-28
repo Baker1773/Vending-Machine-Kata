@@ -29,4 +29,12 @@ public class VendingMachineTest {
 		assertEquals("0.10", vendingMachine.getDisplay());
 	}
 
+	@Test
+	public void vendingMachineAcceptsQuarterByDisplayingCurrentAmount() {
+
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.QUARTER);
+		assertEquals("0.25", vendingMachine.getDisplay());
+	}
+
 }

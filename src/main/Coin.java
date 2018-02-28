@@ -1,5 +1,5 @@
 package main;
 
 public enum Coin {
-	NICKEL, DIME
+	NICKEL, DIME, QUARTER
 }
