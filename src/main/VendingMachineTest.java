@@ -300,4 +300,14 @@ public class VendingMachineTest {
 		assertEquals("THANK YOU", vendingMachine.getDisplay());
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 	}
+
+	@Test
+	public void pressingChipsWithExactChangeWillResultInTheDisplaySayingThankYou() {
+		VendingMachine vendingMachine = new VendingMachine();
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.selectProduct(Product.CHIPS);
+		assertEquals("THANK YOU", vendingMachine.getDisplay());
+	}
 }
