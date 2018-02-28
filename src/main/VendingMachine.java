@@ -7,10 +7,12 @@ public class VendingMachine {
 
 	private double amount;
 	private Map<Coin, Integer> coinReturn;
+	private Map<Coin, Integer> insertedCoins;
 
 	public VendingMachine() {
 		amount = 0;
 		coinReturn = new TreeMap<Coin, Integer>();
+		insertedCoins = new TreeMap<Coin, Integer>();
 	}
 
 	public String getDisplay() {
@@ -21,18 +23,25 @@ public class VendingMachine {
 
 	public void insertCoin(Coin coin) {
 
+		int coinCount = 0;
+		if (insertedCoins.containsKey(coin))
+			coinCount = insertedCoins.get(coin);
+
 		switch (coin) {
 
 		case NICKEL:
 			amount += 0.05;
+			insertedCoins.put(Coin.NICKEL, coinCount + 1);
 			break;
 
 		case DIME:
 			amount += 0.10;
+			insertedCoins.put(Coin.DIME, coinCount + 1);
 			break;
 
 		case QUARTER:
 			amount += 0.25;
+			insertedCoins.put(Coin.QUARTER, coinCount + 1);
 			break;
 
 		case PENNY:
@@ -55,7 +64,7 @@ public class VendingMachine {
 	}
 
 	public void pressReturnCoinButton() {
-		coinReturn.put(Coin.QUARTER, 1);
+		coinReturn.putAll(insertedCoins);
 	}
 
 }

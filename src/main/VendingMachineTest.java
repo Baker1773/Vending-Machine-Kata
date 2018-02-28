@@ -132,4 +132,20 @@ public class VendingMachineTest {
 		assertEquals(1, (int) coinsReturned.get(Coin.QUARTER));
 	}
 
+	@Test
+	public void pressingTheReturnButtonWillReturnMultipleCoins() {
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.NICKEL);
+		vendingMachine.pressReturnCoinButton();
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
+		assertEquals(3, coinsReturned.size());
+		assertEquals(2, (int) coinsReturned.get(Coin.QUARTER));
+		assertEquals(3, (int) coinsReturned.get(Coin.DIME));
+		assertEquals(1, (int) coinsReturned.get(Coin.NICKEL));
+	}
 }
