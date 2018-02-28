@@ -111,4 +111,15 @@ public class VendingMachineTest {
 		assertEquals(0, coinsReturned.size());
 	}
 
+	@Test
+	public void whenCoinReturnIsCheckedItIsEmptied() {
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.PENNY);
+		vendingMachine.insertCoin(Coin.PENNY);
+		Map<Coin, Integer> coinsReturned = vendingMachine.checkCoinReturn();
+		assertEquals(2, (int) coinsReturned.get(Coin.PENNY));
+		coinsReturned = vendingMachine.checkCoinReturn();
+		assertEquals(0, coinsReturned.size());
+	}
+
 }
