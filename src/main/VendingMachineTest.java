@@ -2,6 +2,8 @@ package main;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Map;
+
 import org.junit.Test;
 
 public class VendingMachineTest {
@@ -89,7 +91,17 @@ public class VendingMachineTest {
 	public void whenAPennyIsRejectedItIsPlacedInTheCoinReturn() {
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.insertCoin(Coin.PENNY);
-		assertEquals(Coin.PENNY, vendingMachine.checkCoinReturn());
+		Map<Coin, Integer> coinsReturned = vendingMachine.checkCoinReturn();
+		assertEquals(1, (int) coinsReturned.get(Coin.PENNY));
+	}
+
+	@Test
+	public void whenTwoPenniesAreInsertedBothAreInTheCoinReturn() {
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.PENNY);
+		vendingMachine.insertCoin(Coin.PENNY);
+		Map<Coin, Integer> coinsReturned = vendingMachine.checkCoinReturn();
+		assertEquals(2, (int) coinsReturned.get(Coin.PENNY));
 	}
 
 }
