@@ -13,4 +13,12 @@ public class VendingMachineTest {
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 	}
 
+	@Test
+	public void vendingMachineAcceptsNickelByDisplayingCurrentAmount() {
+
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.NICKEL);
+		assertEquals("0.05", vendingMachine.getDisplay());
+	}
+
 }
