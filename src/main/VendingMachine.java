@@ -32,6 +32,7 @@ public class VendingMachine {
 		}
 
 		if (pressedCandy) {
+			pressedCandy = false;
 			return "PRICE $0.65";
 		}
 
