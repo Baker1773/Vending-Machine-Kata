@@ -20,8 +20,11 @@ public class VendingMachine {
 	}
 
 	public String getDisplay() {
-		if (productPurchased)
+		if (productPurchased) {
+			productPurchased = false;
+			productPressed = false;
 			return "THANK YOU";
+		}
 
 		if (productPressed) {
 			productPressed = false;
@@ -94,8 +97,10 @@ public class VendingMachine {
 			break;
 
 		case COLA:
-			if (amount == 1)
+			if (amount == 1) {
 				productPurchased = true;
+				amount = 0;
+			}
 			productPrice = 1;
 			break;
 
