@@ -104,4 +104,11 @@ public class VendingMachineTest {
 		assertEquals(2, (int) coinsReturned.get(Coin.PENNY));
 	}
 
+	@Test
+	public void newVendingMachinesWillHaveAnEmptyCoinReturn() {
+		VendingMachine vendingMachine = new VendingMachine();
+		Map<Coin, Integer> coinsReturned = vendingMachine.checkCoinReturn();
+		assertEquals(0, coinsReturned.size());
+	}
+
 }
