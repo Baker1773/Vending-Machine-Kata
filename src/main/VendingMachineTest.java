@@ -85,4 +85,11 @@ public class VendingMachineTest {
 		assertEquals("0.25", vendingMachine.getDisplay());
 	}
 
+	@Test
+	public void whenAPennyIsRejectedItIsPlacedInTheCoinReturn() {
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.PENNY);
+		assertEquals(Coin.PENNY, vendingMachine.checkCoinReturn());
+	}
+
 }

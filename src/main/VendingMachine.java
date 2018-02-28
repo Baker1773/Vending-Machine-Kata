@@ -30,4 +30,8 @@ public class VendingMachine {
 		}
 	}
 
+	public Coin checkCoinReturn() {
+		return Coin.PENNY;
+	}
+
 }
