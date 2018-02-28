@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="main.VendingMachineTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-02-28T14:10:07" hostname="Brent-PC" time="0.001">
+<testsuite name="main.VendingMachineTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2018-02-28T14:52:24" hostname="Brent-PC" time="0.003">
   <properties/>
-  <testcase name="WhenNoCoinsAreInsertedVendingMachinedisplaysINSERTCOIN" classname="main.VendingMachineTest" time="0.001"/>
+  <testcase name="vendingMachineAcceptsMultipleQuartersByDisplayingCurrentAmount" classname="main.VendingMachineTest" time="0.001"/>
+  <testcase name="whenNoCoinsAreInsertedVendingMachinedisplaysINSERTCOIN" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineDoesNotAcceptPennyWhenNoOtherCoinsAreInserted" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineDoesNotAcceptPennyWhenOtherCoinsAreInserted" classname="main.VendingMachineTest" time="0.001"/>
+  <testcase name="vendingMachineAcceptsNickelByDisplayingCurrentAmount" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineAcceptsMultipleNickelsByDisplayingCurrentAmount" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineAcceptsDimeByDisplayingCurrentAmount" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineAcceptsMultipleDimesByDisplayingCurrentAmount" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineAcceptsQuarterByDisplayingCurrentAmount" classname="main.VendingMachineTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
