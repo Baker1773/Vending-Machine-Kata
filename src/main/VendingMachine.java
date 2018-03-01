@@ -102,6 +102,7 @@ public class VendingMachine {
 		case CANDY:
 			if (amount == 0.65) {
 				productPurchased = true;
+				amount = 0;
 			}
 			productPrice = 0.65;
 			break;
