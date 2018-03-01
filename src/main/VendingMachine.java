@@ -5,25 +5,32 @@ import java.util.TreeMap;
 
 public class VendingMachine {
 
-	private double amount;
 	private Map<Coin, Integer> coinReturn;
 	private Map<Coin, Integer> insertedCoins;
 	private Map<Product, Integer> dispensedProduct;
-	private TreeMap<Product, Double> productPrices;
 
-	boolean productPressed;
-	double productPrice;
-	boolean productPurchased;
+	private TreeMap<Product, Double> productPrices;
+	private TreeMap<Coin, Double> coinValue;
+
+	private boolean productPressed;
+	private double productPrice;
+	private boolean productPurchased;
 
 	public VendingMachine() {
-		amount = 0;
 		coinReturn = new TreeMap<Coin, Integer>();
 		insertedCoins = new TreeMap<Coin, Integer>();
 		dispensedProduct = new TreeMap<Product, Integer>();
+
 		productPrices = new TreeMap<Product, Double>();
 		productPrices.put(Product.COLA, (double) 1);
 		productPrices.put(Product.CHIPS, 0.5);
 		productPrices.put(Product.CANDY, (double) 0.65);
+
+		coinValue = new TreeMap<Coin, Double>();
+		coinValue.put(Coin.PENNY, 0.01);
+		coinValue.put(Coin.NICKEL, 0.05);
+		coinValue.put(Coin.DIME, 0.10);
+		coinValue.put(Coin.QUARTER, 0.25);
 
 	}
 
@@ -39,9 +46,17 @@ public class VendingMachine {
 			return "PRICE $" + String.format("%.2f", productPrice);
 		}
 
-		if (amount != 0)
-			return String.format("%.2f", amount);
+		if (insertedCoinValue() != 0)
+			return String.format("%.2f", insertedCoinValue());
 		return "INSERT COIN";
+	}
+
+	private double insertedCoinValue() {
+		double total = 0;
+		for (Coin coin : insertedCoins.keySet()) {
+			total += coinValue.get(coin) * insertedCoins.get(coin);
+		}
+		return total;
 	}
 
 	public void insertCoin(Coin coin) {
@@ -53,17 +68,14 @@ public class VendingMachine {
 		switch (coin) {
 
 		case NICKEL:
-			amount += 0.05;
 			insertedCoins.put(Coin.NICKEL, coinCount + 1);
 			break;
 
 		case DIME:
-			amount += 0.10;
 			insertedCoins.put(Coin.DIME, coinCount + 1);
 			break;
 
 		case QUARTER:
-			amount += 0.25;
 			insertedCoins.put(Coin.QUARTER, coinCount + 1);
 			break;
 
@@ -94,7 +106,6 @@ public class VendingMachine {
 				coinReturn.put(c, insertedCoins.get(c));
 		}
 		insertedCoins.clear();
-		amount = 0;
 	}
 
 	public void selectProduct(Product product) {
@@ -104,12 +115,12 @@ public class VendingMachine {
 
 		productPressed = true;
 		productPrice = productPrices.get(product);
-		if (amount == productPrice) {
+		if (insertedCoinValue() == productPrice) {
 			productPurchased = true;
-			amount = 0;
+			insertedCoins.clear();
 			dispensedProduct.put(product, dispencedProductCount + 1);
-		} else if (amount > productPrice) {
-			double remainder = amount - productPrice;
+		} else if (insertedCoinValue() > productPrice) {
+			double remainder = insertedCoinValue() - productPrice;
 			remainder = roundCents(remainder);
 
 			while (remainder >= 0.25) {
@@ -129,8 +140,8 @@ public class VendingMachine {
 			if (remainder == (double) 0.05)
 				coinReturn.put(Coin.NICKEL, 1);
 			productPurchased = true;
-			amount = 0;
 			dispensedProduct.put(product, dispencedProductCount + 1);
+			insertedCoins.clear();
 		}
 	}
 
