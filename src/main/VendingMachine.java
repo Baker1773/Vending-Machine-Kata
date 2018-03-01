@@ -1,7 +1,9 @@
 package main;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class VendingMachine {
 
@@ -9,8 +11,9 @@ public class VendingMachine {
 	private Map<Coin, Integer> insertedCoins;
 	private Map<Product, Integer> dispensedProduct;
 
-	private TreeMap<Product, Double> productPrices;
-	private TreeMap<Coin, Double> coinValue;
+	private Map<Product, Double> productPrices;
+	private Map<Coin, Double> coinValue;
+	private Set<Coin> acceptedCoins;
 
 	private boolean productPressed;
 	private double productPrice;
@@ -31,6 +34,11 @@ public class VendingMachine {
 		coinValue.put(Coin.NICKEL, 0.05);
 		coinValue.put(Coin.DIME, 0.10);
 		coinValue.put(Coin.QUARTER, 0.25);
+
+		acceptedCoins = new TreeSet<Coin>();
+		acceptedCoins.add(Coin.NICKEL);
+		acceptedCoins.add(Coin.DIME);
+		acceptedCoins.add(Coin.QUARTER);
 
 	}
 
@@ -61,33 +69,16 @@ public class VendingMachine {
 
 	public void insertCoin(Coin coin) {
 
-		int coinCount = 0;
-		if (insertedCoins.containsKey(coin))
-			coinCount = insertedCoins.get(coin);
-
-		switch (coin) {
-
-		case NICKEL:
-			insertedCoins.put(Coin.NICKEL, coinCount + 1);
-			break;
-
-		case DIME:
-			insertedCoins.put(Coin.DIME, coinCount + 1);
-			break;
-
-		case QUARTER:
-			insertedCoins.put(Coin.QUARTER, coinCount + 1);
-			break;
-
-		case PENNY:
-			int pennyCount = 0;
-			if (coinReturn.containsKey(Coin.PENNY))
-				pennyCount = coinReturn.get(Coin.PENNY);
-			coinReturn.put(Coin.PENNY, pennyCount + 1);
-			break;
-
-		default:
-			break;
+		if (acceptedCoins.contains(coin)) {
+			int coinCount = 0;
+			if (insertedCoins.containsKey(coin))
+				coinCount = insertedCoins.get(coin);
+			insertedCoins.put(coin, coinCount + 1);
+		} else {
+			int coinCount = 0;
+			if (coinReturn.containsKey(coin))
+				coinCount = coinReturn.get(coin);
+			coinReturn.put(coin, coinCount + 1);
 		}
 	}
 
