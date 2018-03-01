@@ -8,7 +8,7 @@ public class VendingMachine {
 	private double amount;
 	private Map<Coin, Integer> coinReturn;
 	private Map<Coin, Integer> insertedCoins;
-	private Product dispensedProduct;
+	private Map<Product, Integer> dispensedProduct;
 
 	boolean productPressed;
 	double productPrice;
@@ -18,6 +18,7 @@ public class VendingMachine {
 		amount = 0;
 		coinReturn = new TreeMap<Coin, Integer>();
 		insertedCoins = new TreeMap<Coin, Integer>();
+		dispensedProduct = new TreeMap<Product, Integer>();
 	}
 
 	public String getDisplay() {
@@ -91,11 +92,15 @@ public class VendingMachine {
 	}
 
 	public void selectProduct(Product product) {
+		int dispencedProductCount = 0;
+		if (dispensedProduct.containsKey(product))
+			dispencedProductCount = dispensedProduct.get(product);
+		dispensedProduct.put(product, dispencedProductCount + 1);
+
 		productPressed = true;
 		switch (product) {
 		case CANDY:
 			if (amount == 0.65) {
-				dispensedProduct = product;
 				productPurchased = true;
 			}
 			productPrice = 0.65;
@@ -103,7 +108,6 @@ public class VendingMachine {
 
 		case COLA:
 			if (amount == 1) {
-				dispensedProduct = product;
 				productPurchased = true;
 				amount = 0;
 			}
@@ -112,7 +116,6 @@ public class VendingMachine {
 
 		case CHIPS:
 			if (amount == 0.5) {
-				dispensedProduct = product;
 				productPurchased = true;
 			}
 			productPrice = 0.5;
@@ -123,7 +126,7 @@ public class VendingMachine {
 		}
 	}
 
-	public Product getDispensedProducts() {
+	public Map<Product, Integer> getDispensedProducts() {
 		return dispensedProduct;
 	}
 

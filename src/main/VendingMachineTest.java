@@ -332,7 +332,9 @@ public class VendingMachineTest {
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.COLA);
-		assertEquals(Product.COLA, vendingMachine.getDispensedProducts());
+		assertEquals(1, vendingMachine.getDispensedProducts().size());
+		assertEquals(1,
+				(int) vendingMachine.getDispensedProducts().get(Product.COLA));
 	}
 
 	@Test
@@ -342,7 +344,9 @@ public class VendingMachineTest {
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.CHIPS);
-		assertEquals(Product.CHIPS, vendingMachine.getDispensedProducts());
+		assertEquals(1, vendingMachine.getDispensedProducts().size());
+		assertEquals(1,
+				(int) vendingMachine.getDispensedProducts().get(Product.CHIPS));
 	}
 
 	@Test
@@ -354,6 +358,27 @@ public class VendingMachineTest {
 		vendingMachine.insertCoin(Coin.DIME);
 		vendingMachine.insertCoin(Coin.NICKEL);
 		vendingMachine.selectProduct(Product.CANDY);
-		assertEquals(Product.CANDY, vendingMachine.getDispensedProducts());
+		assertEquals(1, vendingMachine.getDispensedProducts().size());
+		assertEquals(1,
+				(int) vendingMachine.getDispensedProducts().get(Product.CANDY));
+	}
+
+	@Test
+	public void afterPurchasingTwoColasThereAreTwoColasInTheDispenser() {
+		VendingMachine vendingMachine = new VendingMachine();
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.selectProduct(Product.COLA);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.selectProduct(Product.COLA);
+		assertEquals(1, vendingMachine.getDispensedProducts().size());
+		assertEquals(2,
+				(int) vendingMachine.getDispensedProducts().get(Product.COLA));
 	}
 }
