@@ -9,6 +9,7 @@ public class VendingMachine {
 	private Map<Coin, Integer> coinReturn;
 	private Map<Coin, Integer> insertedCoins;
 	private Map<Product, Integer> dispensedProduct;
+	private TreeMap<Product, Double> productPrices;
 
 	boolean productPressed;
 	double productPrice;
@@ -19,6 +20,10 @@ public class VendingMachine {
 		coinReturn = new TreeMap<Coin, Integer>();
 		insertedCoins = new TreeMap<Coin, Integer>();
 		dispensedProduct = new TreeMap<Product, Integer>();
+		productPrices = new TreeMap<Product, Double>();
+		productPrices.put(Product.COLA, (double) 1);
+		productPrices.put(Product.CHIPS, 0.5);
+		productPrices.put(Product.CANDY, (double) 0.65);
 
 	}
 
@@ -98,36 +103,11 @@ public class VendingMachine {
 			dispencedProductCount = dispensedProduct.get(product);
 
 		productPressed = true;
-		switch (product) {
-		case CANDY:
-			if (amount == 0.65) {
-				productPurchased = true;
-				amount = 0;
-				dispensedProduct.put(product, dispencedProductCount + 1);
-			}
-			productPrice = 0.65;
-			break;
-
-		case COLA:
-			if (amount == 1) {
-				productPurchased = true;
-				amount = 0;
-				dispensedProduct.put(product, dispencedProductCount + 1);
-			}
-			productPrice = 1;
-			break;
-
-		case CHIPS:
-			if (amount == 0.5) {
-				productPurchased = true;
-				amount = 0;
-				dispensedProduct.put(product, dispencedProductCount + 1);
-			}
-			productPrice = 0.5;
-			break;
-
-		default:
-			break;
+		productPrice = productPrices.get(product);
+		if (amount == productPrice) {
+			productPurchased = true;
+			amount = 0;
+			dispensedProduct.put(product, dispencedProductCount + 1);
 		}
 	}
 
