@@ -546,4 +546,31 @@ public class VendingMachineTest {
 		assertEquals(1, (int) coinsReturned.get(Coin.DIME));
 		assertEquals(2, (int) coinsReturned.get(Coin.QUARTER));
 	}
+
+	@Test
+	public void returnsCorrectChangeAfterGivingTheMachine1Quarter14DimeAnd2NickleForACola() {
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.NICKEL);
+		vendingMachine.insertCoin(Coin.NICKEL);
+		vendingMachine.selectProduct(Product.COLA);
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
+		assertEquals(2, coinsReturned.size());
+		assertEquals(1, (int) coinsReturned.get(Coin.QUARTER));
+		assertEquals(5, (int) coinsReturned.get(Coin.DIME));
+	}
 }

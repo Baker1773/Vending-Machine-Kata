@@ -114,18 +114,28 @@ public class VendingMachine {
 			double remainder = insertedCoinValue() - productPrice;
 			remainder = roundCents(remainder);
 
-			while (remainder >= 0.25) {
+			while (remainder >= 0.25 && insertedCoins.containsKey(Coin.QUARTER)) {
 				remainder -= 0.25;
 				remainder = roundCents(remainder);
-				int coinCount = 0;
+				int coinReturnCount = 0;
 				if (coinReturn.containsKey(Coin.QUARTER))
-					coinCount = coinReturn.get(Coin.QUARTER);
-				coinReturn.put(Coin.QUARTER, coinCount + 1);
+					coinReturnCount = coinReturn.get(Coin.QUARTER);
+				coinReturn.put(Coin.QUARTER, coinReturnCount + 1);
+
+				int coinInsertedCount = insertedCoins.get(Coin.QUARTER);
+				coinInsertedCount--;
+				if (coinInsertedCount > 0)
+					insertedCoins.put(Coin.QUARTER, coinInsertedCount);
+				else
+					insertedCoins.remove(Coin.QUARTER);
 			}
 			while (remainder >= 0.10) {
 				remainder -= 0.10;
 				remainder = roundCents(remainder);
-				coinReturn.put(Coin.DIME, 1);
+				int coinReturnCount = 0;
+				if (coinReturn.containsKey(Coin.DIME))
+					coinReturnCount = coinReturn.get(Coin.DIME);
+				coinReturn.put(Coin.DIME, coinReturnCount + 1);
 			}
 
 			if (remainder == (double) 0.05)
