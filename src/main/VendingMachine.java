@@ -117,6 +117,7 @@ public class VendingMachine {
 		case CHIPS:
 			if (amount == 0.5) {
 				productPurchased = true;
+				amount = 0;
 			}
 			productPrice = 0.5;
 			break;

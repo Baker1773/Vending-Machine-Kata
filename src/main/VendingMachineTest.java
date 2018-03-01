@@ -410,4 +410,15 @@ public class VendingMachineTest {
 		dispensedProducts = vendingMachine.getDispensedProducts();
 		assertEquals(0, dispensedProducts.size());
 	}
+
+	@Test
+	public void afterDisplayingThankYouForChipsTheVendingMachineWillShowInsertCoinAgain() {
+		VendingMachine vendingMachine = new VendingMachine();
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.selectProduct(Product.CHIPS);
+		assertEquals("THANK YOU", vendingMachine.getDisplay());
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+	}
 }
