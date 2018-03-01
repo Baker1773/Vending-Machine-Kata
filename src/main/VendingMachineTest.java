@@ -381,4 +381,10 @@ public class VendingMachineTest {
 		assertEquals(2,
 				(int) vendingMachine.getDispensedProducts().get(Product.COLA));
 	}
+
+	@Test
+	public void newVendingMachinesHaveNothingInTheDispenser() {
+		VendingMachine vendingMachine = new VendingMachine();
+		assertEquals(0, vendingMachine.getDispensedProducts().size());
+	}
 }
