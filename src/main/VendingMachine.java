@@ -110,6 +110,8 @@ public class VendingMachine {
 			dispensedProduct.put(product, dispencedProductCount + 1);
 		} else if (amount > productPrice) {
 			coinReturn.put(Coin.QUARTER, 1);
+			productPurchased = true;
+			amount = 0;
 		}
 	}
 
