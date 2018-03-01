@@ -109,11 +109,24 @@ public class VendingMachine {
 			amount = 0;
 			dispensedProduct.put(product, dispencedProductCount + 1);
 		} else if (amount > productPrice) {
-			coinReturn.put(Coin.QUARTER, 1);
+			double remainder = amount - productPrice;
+			remainder = roundCents(remainder);
+
+			if (remainder >= 0.25) {
+				remainder -= 0.25;
+				remainder = roundCents(remainder);
+				coinReturn.put(Coin.QUARTER, 1);
+			}
+			if (remainder == (double) 0.05)
+				coinReturn.put(Coin.NICKEL, 1);
 			productPurchased = true;
 			amount = 0;
 			dispensedProduct.put(product, dispencedProductCount + 1);
 		}
+	}
+
+	private double roundCents(double cents) {
+		return 0.01 * Math.round(cents * 100);
 	}
 
 	public Map<Product, Integer> getDispensedProducts() {
