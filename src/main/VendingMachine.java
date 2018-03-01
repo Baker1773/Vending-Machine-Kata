@@ -117,6 +117,10 @@ public class VendingMachine {
 				remainder = roundCents(remainder);
 				coinReturn.put(Coin.QUARTER, 1);
 			}
+			if (remainder == 0.10) {
+				coinReturn.put(Coin.DIME, 1);
+			}
+
 			if (remainder == (double) 0.05)
 				coinReturn.put(Coin.NICKEL, 1);
 			productPurchased = true;

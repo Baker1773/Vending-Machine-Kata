@@ -513,4 +513,18 @@ public class VendingMachineTest {
 		assertEquals(1, (int) coinsReturned.get(Coin.QUARTER));
 		assertEquals(1, (int) coinsReturned.get(Coin.NICKEL));
 	}
+
+	@Test
+	public void returnAQuarterAfterGivingTheMachine4QuartersAndADimeForACola() {
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.selectProduct(Product.COLA);
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
+		assertEquals(1, coinsReturned.size());
+		assertEquals(1, (int) coinsReturned.get(Coin.DIME));
+	}
 }
