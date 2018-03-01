@@ -8,6 +8,7 @@ public class VendingMachine {
 	private double amount;
 	private Map<Coin, Integer> coinReturn;
 	private Map<Coin, Integer> insertedCoins;
+	private Product dispensedProduct;
 
 	boolean productPressed;
 	double productPrice;
@@ -100,6 +101,7 @@ public class VendingMachine {
 
 		case COLA:
 			if (amount == 1) {
+				dispensedProduct = product;
 				productPurchased = true;
 				amount = 0;
 			}
@@ -107,8 +109,10 @@ public class VendingMachine {
 			break;
 
 		case CHIPS:
-			if (amount == 0.5)
+			if (amount == 0.5) {
+				dispensedProduct = product;
 				productPurchased = true;
+			}
 			productPrice = 0.5;
 			break;
 
@@ -118,7 +122,7 @@ public class VendingMachine {
 	}
 
 	public Product getDispensedProducts() {
-		return Product.COLA;
+		return dispensedProduct;
 	}
 
 }
