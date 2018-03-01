@@ -117,4 +117,8 @@ public class VendingMachine {
 		}
 	}
 
+	public Product getDispensedProducts() {
+		return Product.COLA;
+	}
+
 }
