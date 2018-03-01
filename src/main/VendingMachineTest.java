@@ -332,9 +332,10 @@ public class VendingMachineTest {
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.COLA);
-		assertEquals(1, vendingMachine.getDispensedProducts().size());
-		assertEquals(1,
-				(int) vendingMachine.getDispensedProducts().get(Product.COLA));
+		Map<Product, Integer> dispensedProducts = vendingMachine
+				.getDispensedProducts();
+		assertEquals(1, dispensedProducts.size());
+		assertEquals(1, (int) dispensedProducts.get(Product.COLA));
 	}
 
 	@Test
@@ -344,9 +345,10 @@ public class VendingMachineTest {
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.CHIPS);
-		assertEquals(1, vendingMachine.getDispensedProducts().size());
-		assertEquals(1,
-				(int) vendingMachine.getDispensedProducts().get(Product.CHIPS));
+		Map<Product, Integer> dispensedProducts = vendingMachine
+				.getDispensedProducts();
+		assertEquals(1, dispensedProducts.size());
+		assertEquals(1, (int) dispensedProducts.get(Product.CHIPS));
 	}
 
 	@Test
@@ -358,9 +360,10 @@ public class VendingMachineTest {
 		vendingMachine.insertCoin(Coin.DIME);
 		vendingMachine.insertCoin(Coin.NICKEL);
 		vendingMachine.selectProduct(Product.CANDY);
-		assertEquals(1, vendingMachine.getDispensedProducts().size());
-		assertEquals(1,
-				(int) vendingMachine.getDispensedProducts().get(Product.CANDY));
+		Map<Product, Integer> dispensedProducts = vendingMachine
+				.getDispensedProducts();
+		assertEquals(1, dispensedProducts.size());
+		assertEquals(1, (int) dispensedProducts.get(Product.CANDY));
 	}
 
 	@Test
@@ -377,14 +380,34 @@ public class VendingMachineTest {
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.COLA);
-		assertEquals(1, vendingMachine.getDispensedProducts().size());
-		assertEquals(2,
-				(int) vendingMachine.getDispensedProducts().get(Product.COLA));
+		Map<Product, Integer> dispensedProducts = vendingMachine
+				.getDispensedProducts();
+		assertEquals(1, dispensedProducts.size());
+		assertEquals(2, (int) dispensedProducts.get(Product.COLA));
 	}
 
 	@Test
 	public void newVendingMachinesHaveNothingInTheDispenser() {
 		VendingMachine vendingMachine = new VendingMachine();
-		assertEquals(0, vendingMachine.getDispensedProducts().size());
+		Map<Product, Integer> dispensedProducts = vendingMachine
+				.getDispensedProducts();
+		assertEquals(0, dispensedProducts.size());
+	}
+
+	@Test
+	public void afterGettingProductsFromTheDispenserTheDispenserIsEmpty() {
+		VendingMachine vendingMachine = new VendingMachine();
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.selectProduct(Product.COLA);
+		Map<Product, Integer> dispensedProducts = vendingMachine
+				.getDispensedProducts();
+		assertEquals(1, dispensedProducts.size());
+		assertEquals(1, (int) dispensedProducts.get(Product.COLA));
+		dispensedProducts = vendingMachine.getDispensedProducts();
+		assertEquals(0, dispensedProducts.size());
 	}
 }

@@ -127,7 +127,10 @@ public class VendingMachine {
 	}
 
 	public Map<Product, Integer> getDispensedProducts() {
-		return dispensedProduct;
+		Map<Product, Integer> retreivedProducts = new TreeMap<Product, Integer>();
+		retreivedProducts.putAll(dispensedProduct);
+		dispensedProduct.clear();
+		return retreivedProducts;
 	}
 
 }
