@@ -19,6 +19,7 @@ public class VendingMachine {
 		coinReturn = new TreeMap<Coin, Integer>();
 		insertedCoins = new TreeMap<Coin, Integer>();
 		dispensedProduct = new TreeMap<Product, Integer>();
+
 	}
 
 	public String getDisplay() {
@@ -95,7 +96,6 @@ public class VendingMachine {
 		int dispencedProductCount = 0;
 		if (dispensedProduct.containsKey(product))
 			dispencedProductCount = dispensedProduct.get(product);
-		dispensedProduct.put(product, dispencedProductCount + 1);
 
 		productPressed = true;
 		switch (product) {
@@ -103,6 +103,7 @@ public class VendingMachine {
 			if (amount == 0.65) {
 				productPurchased = true;
 				amount = 0;
+				dispensedProduct.put(product, dispencedProductCount + 1);
 			}
 			productPrice = 0.65;
 			break;
@@ -111,6 +112,7 @@ public class VendingMachine {
 			if (amount == 1) {
 				productPurchased = true;
 				amount = 0;
+				dispensedProduct.put(product, dispencedProductCount + 1);
 			}
 			productPrice = 1;
 			break;
@@ -119,6 +121,7 @@ public class VendingMachine {
 			if (amount == 0.5) {
 				productPurchased = true;
 				amount = 0;
+				dispensedProduct.put(product, dispencedProductCount + 1);
 			}
 			productPrice = 0.5;
 			break;

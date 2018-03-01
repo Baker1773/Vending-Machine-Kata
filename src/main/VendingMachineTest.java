@@ -326,7 +326,6 @@ public class VendingMachineTest {
 	@Test
 	public void afterPurchasingAColaAColaIsInTheDispenser() {
 		VendingMachine vendingMachine = new VendingMachine();
-		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
@@ -341,7 +340,6 @@ public class VendingMachineTest {
 	@Test
 	public void afterPurchasingAChipsAChipsIsInTheDispenser() {
 		VendingMachine vendingMachine = new VendingMachine();
-		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.CHIPS);
@@ -354,7 +352,6 @@ public class VendingMachineTest {
 	@Test
 	public void afterPurchasingACandyACandyIsInTheDispenser() {
 		VendingMachine vendingMachine = new VendingMachine();
-		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.DIME);
@@ -369,7 +366,6 @@ public class VendingMachineTest {
 	@Test
 	public void afterPurchasingTwoColasThereAreTwoColasInTheDispenser() {
 		VendingMachine vendingMachine = new VendingMachine();
-		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
@@ -397,7 +393,6 @@ public class VendingMachineTest {
 	@Test
 	public void afterGettingProductsFromTheDispenserTheDispenserIsEmpty() {
 		VendingMachine vendingMachine = new VendingMachine();
-		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
@@ -425,6 +420,7 @@ public class VendingMachineTest {
 	@Test
 	public void afterDisplayingThankYouForCandyTheVendingMachineWillShowInsertCoinAgain() {
 		VendingMachine vendingMachine = new VendingMachine();
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
@@ -433,5 +429,16 @@ public class VendingMachineTest {
 		vendingMachine.selectProduct(Product.CANDY);
 		assertEquals("THANK YOU", vendingMachine.getDisplay());
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+	}
+
+	@Test
+	public void productsNotPurchasedWillNotBeDispensed() {
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.selectProduct(Product.COLA);
+		vendingMachine.selectProduct(Product.CHIPS);
+		vendingMachine.selectProduct(Product.CANDY);
+		Map<Product, Integer> dispensedProducts = vendingMachine
+				.getDispensedProducts();
+		assertEquals(0, dispensedProducts.size());
 	}
 }
