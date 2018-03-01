@@ -112,12 +112,17 @@ public class VendingMachine {
 			double remainder = amount - productPrice;
 			remainder = roundCents(remainder);
 
-			if (remainder >= 0.25) {
+			while (remainder >= 0.25) {
 				remainder -= 0.25;
 				remainder = roundCents(remainder);
-				coinReturn.put(Coin.QUARTER, 1);
+				int coinCount = 0;
+				if (coinReturn.containsKey(Coin.QUARTER))
+					coinCount = coinReturn.get(Coin.QUARTER);
+				coinReturn.put(Coin.QUARTER, coinCount + 1);
 			}
-			if (remainder == 0.10) {
+			while (remainder >= 0.10) {
+				remainder -= 0.10;
+				remainder = roundCents(remainder);
 				coinReturn.put(Coin.DIME, 1);
 			}
 

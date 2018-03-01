@@ -485,7 +485,7 @@ public class VendingMachineTest {
 	}
 
 	@Test
-	public void returnAQuarterAfterGivingTheMachine4QuartersAndANickleForACola() {
+	public void returnsCorrectChangeAfterGivingTheMachine4QuartersAndANickleForACola() {
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
@@ -499,7 +499,7 @@ public class VendingMachineTest {
 	}
 
 	@Test
-	public void returnAQuarterAfterGivingTheMachine5QuartersAndANickleForACola() {
+	public void returnsCorrectChangeAfterGivingTheMachine5QuartersAndANickleForACola() {
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
@@ -515,7 +515,7 @@ public class VendingMachineTest {
 	}
 
 	@Test
-	public void returnAQuarterAfterGivingTheMachine4QuartersAndADimeForACola() {
+	public void returnsCorrectChangeAfterGivingTheMachine4QuartersAndADimeForACola() {
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
@@ -526,5 +526,24 @@ public class VendingMachineTest {
 		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
 		assertEquals(1, coinsReturned.size());
 		assertEquals(1, (int) coinsReturned.get(Coin.DIME));
+	}
+
+	@Test
+	public void returnsCorrectChangeAfterGivingTheMachine6Quarters1DimeAnd1NickleForACola() {
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.insertCoin(Coin.NICKEL);
+		vendingMachine.selectProduct(Product.COLA);
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
+		assertEquals(3, coinsReturned.size());
+		assertEquals(1, (int) coinsReturned.get(Coin.NICKEL));
+		assertEquals(1, (int) coinsReturned.get(Coin.DIME));
+		assertEquals(2, (int) coinsReturned.get(Coin.QUARTER));
 	}
 }
