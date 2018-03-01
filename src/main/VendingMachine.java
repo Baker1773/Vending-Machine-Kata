@@ -94,8 +94,10 @@ public class VendingMachine {
 		productPressed = true;
 		switch (product) {
 		case CANDY:
-			if (amount == 0.65)
+			if (amount == 0.65) {
+				dispensedProduct = product;
 				productPurchased = true;
+			}
 			productPrice = 0.65;
 			break;
 
