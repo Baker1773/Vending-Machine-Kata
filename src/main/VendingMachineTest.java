@@ -468,4 +468,19 @@ public class VendingMachineTest {
 		assertEquals("THANK YOU", vendingMachine.getDisplay());
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 	}
+
+	@Test
+	public void whenPurchasingAProductWithToMuchMoneyTheMachineWillDispenceTheProduct() {
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.selectProduct(Product.COLA);
+		Map<Product, Integer> dispensedProducts = vendingMachine
+				.getDispensedProducts();
+		assertEquals(1, dispensedProducts.size());
+		assertEquals(1, (int) dispensedProducts.get(Product.COLA));
+	}
 }

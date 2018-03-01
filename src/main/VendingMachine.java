@@ -112,6 +112,7 @@ public class VendingMachine {
 			coinReturn.put(Coin.QUARTER, 1);
 			productPurchased = true;
 			amount = 0;
+			dispensedProduct.put(product, dispencedProductCount + 1);
 		}
 	}
 
