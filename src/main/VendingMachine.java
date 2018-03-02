@@ -115,11 +115,7 @@ public class VendingMachine {
 
 		productPressed = true;
 		productPrice = productPrices.get(product);
-		if (insertedCoinValue() == productPrice) {
-			productPurchased = true;
-			insertedCoins.clear();
-			dispensedProduct.put(product, dispencedProductCount + 1);
-		} else if (insertedCoinValue() > productPrice) {
+		if (insertedCoinValue() >= productPrice) {
 			double remainder = insertedCoinValue() - productPrice;
 			remainder = roundCents(remainder);
 
