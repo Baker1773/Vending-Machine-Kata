@@ -580,4 +580,23 @@ public class VendingMachineTest {
 		assertEquals("SOLD OUT", vendingMachine.getDisplay());
 		assertEquals("0.25", vendingMachine.getDisplay());
 	}
+
+	@Test
+	public void onlyOneColaCanBePurchasedIfTheMachineHasOneCola() {
+		vendingMachine = new VendingMachine();
+		TreeMap<Product, Integer> newInventory = new TreeMap<Product, Integer>();
+		newInventory.put(Product.COLA, 1);
+		vendingMachine.serviceProductInventory(newInventory);
+		for (int i = 0; i < 4; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.selectProduct(Product.COLA);
+		vendingMachine.getDisplay();
+		for (int i = 0; i < 4; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.selectProduct(Product.COLA);
+		Map<Product, Integer> dispensedProducts = vendingMachine
+				.getDispensedProducts();
+		assertEquals(1, dispensedProducts.size());
+		assertEquals(1, (int) dispensedProducts.get(Product.COLA));
+	}
 }

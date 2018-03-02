@@ -150,6 +150,14 @@ public class VendingMachine {
 			if (remainder == 0) {
 				productPurchased = true;
 				dispensedProduct.put(product, dispencedProductCount + 1);
+
+				int productCount = productInventory.get(product);
+				productCount--;
+				if (productCount > 0)
+					productInventory.put(product, productCount);
+				else
+					productInventory.remove(product);
+
 				moveAllCoinsFromOriginToDestination(coinsToBeReturned,
 						coinReturn);
 				insertedCoins.clear();
