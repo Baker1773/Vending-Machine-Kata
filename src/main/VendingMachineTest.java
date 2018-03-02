@@ -257,10 +257,8 @@ public class VendingMachineTest {
 	@Test
 	public void pressingColaWithExactChangeWillResultInTheDisplaySayingThankYou() {
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 4; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.COLA);
 		assertEquals("THANK YOU", vendingMachine.getDisplay());
 	}
@@ -268,10 +266,8 @@ public class VendingMachineTest {
 	@Test
 	public void afterDisplayingThankYouTheVendingMachineWillShowInsertCoinAgain() {
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 4; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.COLA);
 		assertEquals("THANK YOU", vendingMachine.getDisplay());
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
@@ -336,15 +332,11 @@ public class VendingMachineTest {
 
 	@Test
 	public void afterPurchasingTwoColasThereAreTwoColasInTheDispenser() {
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 4; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.COLA);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 4; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.COLA);
 		Map<Product, Integer> dispensedProducts = vendingMachine
 				.getDispensedProducts();
@@ -361,10 +353,8 @@ public class VendingMachineTest {
 
 	@Test
 	public void afterGettingProductsFromTheDispenserTheDispenserIsEmpty() {
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 4; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.COLA);
 		Map<Product, Integer> dispensedProducts = vendingMachine
 				.getDispensedProducts();
@@ -408,11 +398,8 @@ public class VendingMachineTest {
 
 	@Test
 	public void returnAQuarterAfterGivingTheMachine5QuartersForACola() {
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 5; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.COLA);
 		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
 		assertEquals(1, coinsReturned.size());
@@ -421,11 +408,8 @@ public class VendingMachineTest {
 
 	@Test
 	public void whenPurchasingAProductWithToMuchMoneyTheMachineWillDisplayThankYouThenInsertCoins() {
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 5; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.COLA);
 		assertEquals("THANK YOU", vendingMachine.getDisplay());
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
@@ -433,11 +417,8 @@ public class VendingMachineTest {
 
 	@Test
 	public void whenPurchasingAProductWithToMuchMoneyTheMachineWillDispenceTheProduct() {
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 5; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.COLA);
 		Map<Product, Integer> dispensedProducts = vendingMachine
 				.getDispensedProducts();
@@ -447,10 +428,8 @@ public class VendingMachineTest {
 
 	@Test
 	public void returnsCorrectChangeAfterGivingTheMachine4QuartersAndANickleForACola() {
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 4; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.NICKEL);
 		vendingMachine.selectProduct(Product.COLA);
 		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
@@ -460,11 +439,8 @@ public class VendingMachineTest {
 
 	@Test
 	public void returnsCorrectChangeAfterGivingTheMachine5QuartersAndANickleForACola() {
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 5; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.NICKEL);
 		vendingMachine.selectProduct(Product.COLA);
 		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
@@ -475,10 +451,8 @@ public class VendingMachineTest {
 
 	@Test
 	public void returnsCorrectChangeAfterGivingTheMachine4QuartersAndADimeForACola() {
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 4; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.DIME);
 		vendingMachine.selectProduct(Product.COLA);
 		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
