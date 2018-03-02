@@ -563,4 +563,12 @@ public class VendingMachineTest {
 		vendingMachine.selectProduct(Product.COLA);
 		assertEquals(0, vendingMachine.getDispensedProducts().size());
 	}
+
+	@Test
+	public void afterDisplayingSoldOutDisplayWillGoBackToInsertCoinOnAMachineWithNoCoinsInserted() {
+		vendingMachine = new VendingMachine();
+		vendingMachine.selectProduct(Product.COLA);
+		assertEquals("SOLD OUT", vendingMachine.getDisplay());
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+	}
 }

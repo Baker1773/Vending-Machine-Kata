@@ -55,6 +55,7 @@ public class VendingMachine {
 
 	public String getDisplay() {
 		if (productSoldOut) {
+			productSoldOut = false;
 			return "SOLD OUT";
 		}
 
