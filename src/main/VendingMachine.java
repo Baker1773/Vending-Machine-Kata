@@ -224,6 +224,8 @@ public class VendingMachine {
 
 				moveAllCoinsFromOriginToDestination(coinsToBeReturned,
 						coinReturn);
+				moveAllCoinsFromOriginToDestination(insertedCoins,
+						coinInventory);
 				insertedCoins.clear();
 			} else {
 				moveAllCoinsFromOriginToDestination(coinsToBeReturned,
