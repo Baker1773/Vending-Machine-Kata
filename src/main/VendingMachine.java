@@ -267,8 +267,6 @@ public class VendingMachine {
 	}
 
 	public void serviceCoinInventory(TreeMap<Coin, Integer> coinInventoryToAdd) {
-		coinInventory.put(Coin.NICKEL, 1);
-
 		for (Coin c : coinInventoryToAdd.keySet()) {
 			if (coinInventory.containsKey(c))
 				coinInventory.put(c,

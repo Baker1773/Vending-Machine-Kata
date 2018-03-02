@@ -658,4 +658,21 @@ public class VendingMachineTest {
 		assertEquals(1, coinsReturned.size());
 		assertEquals(2, (int) coinsReturned.get(Coin.NICKEL));
 	}
+
+	@Test
+	public void vendingMachineWillFailToMakeChangeAfterBeingLoadedWithTheWrongTypeOfCoinsToMakeChange() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.QUARTER, 20);
+		coinInventoryToAdd.put(Coin.DIME, 20);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
+		for (int i = 0; i < 3; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 3; i++)
+			vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.selectProduct(Product.COLA);
+		Map<Product, Integer> dispensedProducts = vendingMachine
+				.getDispensedProducts();
+		assertEquals(0, dispensedProducts.size());
+	}
 }
