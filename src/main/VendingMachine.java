@@ -136,6 +136,13 @@ public class VendingMachine {
 				if (coinReturn.containsKey(Coin.DIME))
 					coinReturnCount = coinReturn.get(Coin.DIME);
 				coinReturn.put(Coin.DIME, coinReturnCount + 1);
+
+				int coinInsertedCount = insertedCoins.get(Coin.DIME);
+				coinInsertedCount--;
+				if (coinInsertedCount > 0)
+					insertedCoins.put(Coin.DIME, coinInsertedCount);
+				else
+					insertedCoins.remove(Coin.DIME);
 			}
 
 			while (remainder >= (double) 0.05) {
