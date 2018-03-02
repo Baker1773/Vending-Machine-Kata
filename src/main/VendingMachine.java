@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -13,6 +14,7 @@ public class VendingMachine {
 
 	private Map<Product, Double> productPrices;
 	private Map<Coin, Double> coinValue;
+	private ArrayList<Coin> CoinListByDescendingValue;
 	private Set<Coin> acceptedCoins;
 
 	private boolean productPressed;
@@ -40,6 +42,11 @@ public class VendingMachine {
 		acceptedCoins.add(Coin.DIME);
 		acceptedCoins.add(Coin.QUARTER);
 
+		CoinListByDescendingValue = new ArrayList<Coin>();
+		CoinListByDescendingValue.add(Coin.QUARTER);
+		CoinListByDescendingValue.add(Coin.DIME);
+		CoinListByDescendingValue.add(Coin.NICKEL);
+		CoinListByDescendingValue.add(Coin.PENNY);
 	}
 
 	public String getDisplay() {
@@ -116,45 +123,22 @@ public class VendingMachine {
 			double remainder = insertedCoinValue() - productPrice;
 			remainder = roundCents(remainder);
 
-			while (remainder >= 0.25 && insertedCoins.containsKey(Coin.QUARTER)) {
-				remainder -= 0.25;
-				remainder = roundCents(remainder);
-				int coinReturnCount = 0;
-				if (coinReturn.containsKey(Coin.QUARTER))
-					coinReturnCount = coinReturn.get(Coin.QUARTER);
-				coinReturn.put(Coin.QUARTER, coinReturnCount + 1);
+			for (Coin coin : CoinListByDescendingValue) {
+				while (remainder >= coinValue.get(coin)
+						&& insertedCoins.containsKey(coin)) {
+					remainder = roundCents(remainder - coinValue.get(coin));
+					int coinReturnCount = 0;
+					if (coinsToBeReturned.containsKey(coin))
+						coinReturnCount = coinsToBeReturned.get(coin);
+					coinsToBeReturned.put(coin, coinReturnCount + 1);
 
-				int coinInsertedCount = insertedCoins.get(Coin.QUARTER);
-				coinInsertedCount--;
-				if (coinInsertedCount > 0)
-					insertedCoins.put(Coin.QUARTER, coinInsertedCount);
-				else
-					insertedCoins.remove(Coin.QUARTER);
-			}
-			while (remainder >= 0.10 && insertedCoins.containsKey(Coin.DIME)) {
-				remainder -= 0.10;
-				remainder = roundCents(remainder);
-				int coinReturnCount = 0;
-				if (coinsToBeReturned.containsKey(Coin.DIME))
-					coinReturnCount = coinsToBeReturned.get(Coin.DIME);
-				coinsToBeReturned.put(Coin.DIME, coinReturnCount + 1);
-
-				int coinInsertedCount = insertedCoins.get(Coin.DIME);
-				coinInsertedCount--;
-				if (coinInsertedCount > 0)
-					insertedCoins.put(Coin.DIME, coinInsertedCount);
-				else
-					insertedCoins.remove(Coin.DIME);
-			}
-
-			while (remainder >= (double) 0.05
-					&& insertedCoins.containsKey(Coin.NICKEL)) {
-				remainder -= 0.05;
-				remainder = roundCents(remainder);
-				int coinReturnCount = 0;
-				if (coinReturn.containsKey(Coin.NICKEL))
-					coinReturnCount = coinReturn.get(Coin.NICKEL);
-				coinReturn.put(Coin.NICKEL, coinReturnCount + 1);
+					int coinInsertedCount = insertedCoins.get(coin);
+					coinInsertedCount--;
+					if (coinInsertedCount > 0)
+						insertedCoins.put(coin, coinInsertedCount);
+					else
+						insertedCoins.remove(coin);
+				}
 			}
 
 			if (remainder == 0) {
