@@ -556,4 +556,11 @@ public class VendingMachineTest {
 		vendingMachine.selectProduct(Product.COLA);
 		assertEquals("SOLD OUT", vendingMachine.getDisplay());
 	}
+
+	@Test
+	public void vendingMachineWillNotDispenceAProductWhenProductIsOutOfStock() {
+		vendingMachine = new VendingMachine();
+		vendingMachine.selectProduct(Product.COLA);
+		assertEquals(0, vendingMachine.getDispensedProducts().size());
+	}
 }
