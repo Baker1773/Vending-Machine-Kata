@@ -599,4 +599,17 @@ public class VendingMachineTest {
 		assertEquals(1, dispensedProducts.size());
 		assertEquals(1, (int) dispensedProducts.get(Product.COLA));
 	}
+
+	@Test
+	public void givingTheMachine14QuartersAnd9DimesForACola() {
+		for (int i = 0; i < 14; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 9; i++)
+			vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.selectProduct(Product.COLA);
+		Map<Product, Integer> dispensedProducts = vendingMachine
+				.getDispensedProducts();
+		assertEquals(1, dispensedProducts.size());
+		assertEquals(1, (int) dispensedProducts.get(Product.COLA));
+	}
 }

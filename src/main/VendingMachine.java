@@ -146,6 +146,35 @@ public class VendingMachine {
 						insertedCoins.remove(coin);
 				}
 			}
+			if (remainder != 0) {
+				moveAllCoinsFromOriginToDestination(coinsToBeReturned,
+						insertedCoins);
+				coinsToBeReturned.clear();
+
+				remainder = insertedCoinValue() - productPrice;
+				remainder = roundCents(remainder);
+
+				int index = CoinListByDescendingValue.size() - 1;
+				for (; index >= 0; index--) {
+					Coin coin = CoinListByDescendingValue.get(index);
+					while (remainder >= coinValue.get(coin)
+							&& insertedCoins.containsKey(coin)) {
+
+						remainder = roundCents(remainder - coinValue.get(coin));
+						int coinReturnCount = 0;
+						if (coinsToBeReturned.containsKey(coin))
+							coinReturnCount = coinsToBeReturned.get(coin);
+						coinsToBeReturned.put(coin, coinReturnCount + 1);
+
+						int coinInsertedCount = insertedCoins.get(coin);
+						coinInsertedCount--;
+						if (coinInsertedCount > 0)
+							insertedCoins.put(coin, coinInsertedCount);
+						else
+							insertedCoins.remove(coin);
+					}
+				}
+			}
 
 			if (remainder == 0) {
 				productPurchased = true;
