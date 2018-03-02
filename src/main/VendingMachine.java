@@ -12,6 +12,7 @@ public class VendingMachine {
 	private Map<Coin, Integer> insertedCoins;
 	private Map<Product, Integer> dispensedProduct;
 	private Map<Product, Integer> productInventory;
+	private Map<Coin, Integer> coinInventory;
 
 	private Map<Product, Double> productPrices;
 	private Map<Coin, Double> coinValue;
@@ -51,6 +52,7 @@ public class VendingMachine {
 		CoinListByDescendingValue.add(Coin.PENNY);
 
 		productInventory = new TreeMap<Product, Integer>();
+		coinInventory = new TreeMap<Coin, Integer>();
 	}
 
 	public String getDisplay() {
@@ -147,6 +149,39 @@ public class VendingMachine {
 				}
 			}
 			if (remainder != 0) {
+				Map<Coin, Integer> coinsReturnedFromInventory = new TreeMap<Coin, Integer>();
+				for (Coin coin : CoinListByDescendingValue) {
+					while (remainder >= coinValue.get(coin)
+							&& coinInventory.containsKey(coin)) {
+
+						remainder = roundCents(remainder - coinValue.get(coin));
+						int coinReturnCount = 0;
+						if (coinsReturnedFromInventory.containsKey(coin))
+							coinReturnCount = coinsReturnedFromInventory
+									.get(coin);
+						coinsReturnedFromInventory.put(coin,
+								coinReturnCount + 1);
+
+						int coinInsertedCount = coinInventory.get(coin);
+						coinInsertedCount--;
+						if (coinInsertedCount > 0)
+							coinInventory.put(coin, coinInsertedCount);
+						else
+							coinInventory.remove(coin);
+					}
+				}
+
+				if (remainder != 0) {
+					moveAllCoinsFromOriginToDestination(
+							coinsReturnedFromInventory, coinInventory);
+					coinsReturnedFromInventory.clear();
+				} else {
+					moveAllCoinsFromOriginToDestination(
+							coinsReturnedFromInventory, coinsToBeReturned);
+				}
+
+			}
+			if (remainder != 0) {
 				moveAllCoinsFromOriginToDestination(coinsToBeReturned,
 						insertedCoins);
 				coinsToBeReturned.clear();
@@ -226,6 +261,18 @@ public class VendingMachine {
 						productInventory.get(p) + newInventory.get(p));
 			else
 				productInventory.put(p, newInventory.get(p));
+		}
+	}
+
+	public void serviceCoinInventory(TreeMap<Coin, Integer> coinInventoryToAdd) {
+		coinInventory.put(Coin.NICKEL, 1);
+
+		for (Coin c : coinInventoryToAdd.keySet()) {
+			if (coinInventory.containsKey(c))
+				coinInventory.put(c,
+						coinInventory.get(c) + coinInventoryToAdd.get(c));
+			else
+				coinInventory.put(c, coinInventoryToAdd.get(c));
 		}
 	}
 }

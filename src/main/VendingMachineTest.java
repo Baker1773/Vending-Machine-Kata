@@ -612,4 +612,22 @@ public class VendingMachineTest {
 		assertEquals(1, dispensedProducts.size());
 		assertEquals(1, (int) dispensedProducts.get(Product.COLA));
 	}
+
+	@Test
+	public void whenANickelIsPreloadedIntoTheMachineAnd3QuartersAnd3DimesAreUsedToBuyAColaANickelIsReturned() {
+
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
+		for (int i = 0; i < 3; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 3; i++)
+			vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.selectProduct(Product.COLA);
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
+		assertEquals(1, coinsReturned.size());
+		assertEquals(1, (int) coinsReturned.get(Coin.NICKEL));
+	}
+
 }
