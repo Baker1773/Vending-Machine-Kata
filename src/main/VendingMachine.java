@@ -104,6 +104,8 @@ public class VendingMachine {
 		if (dispensedProduct.containsKey(product))
 			dispencedProductCount = dispensedProduct.get(product);
 
+		Map<Coin, Integer> coinsToBeReturned = new TreeMap<Coin, Integer>();
+
 		productPressed = true;
 		productPrice = productPrices.get(product);
 		if (insertedCoinValue() == productPrice) {
@@ -133,9 +135,9 @@ public class VendingMachine {
 				remainder -= 0.10;
 				remainder = roundCents(remainder);
 				int coinReturnCount = 0;
-				if (coinReturn.containsKey(Coin.DIME))
-					coinReturnCount = coinReturn.get(Coin.DIME);
-				coinReturn.put(Coin.DIME, coinReturnCount + 1);
+				if (coinsToBeReturned.containsKey(Coin.DIME))
+					coinReturnCount = coinsToBeReturned.get(Coin.DIME);
+				coinsToBeReturned.put(Coin.DIME, coinReturnCount + 1);
 
 				int coinInsertedCount = insertedCoins.get(Coin.DIME);
 				coinInsertedCount--;
@@ -158,9 +160,22 @@ public class VendingMachine {
 			if (remainder == 0) {
 				productPurchased = true;
 				dispensedProduct.put(product, dispencedProductCount + 1);
+				for (Coin c : coinsToBeReturned.keySet()) {
+					if (coinReturn.containsKey(c))
+						coinReturn.put(c,
+								coinReturn.get(c) + coinsToBeReturned.get(c));
+					else
+						coinReturn.put(c, coinsToBeReturned.get(c));
+				}
 				insertedCoins.clear();
 			} else {
-
+				for (Coin c : coinsToBeReturned.keySet()) {
+					if (insertedCoins.containsKey(c))
+						insertedCoins.put(c, insertedCoins.get(c)
+								+ coinsToBeReturned.get(c));
+					else
+						insertedCoins.put(c, coinsToBeReturned.get(c));
+				}
 			}
 		}
 	}

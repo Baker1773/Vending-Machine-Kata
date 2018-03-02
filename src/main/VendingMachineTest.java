@@ -609,4 +609,19 @@ public class VendingMachineTest {
 		vendingMachine.getDisplay();
 		assertEquals("1.05", vendingMachine.getDisplay());
 	}
+
+	@Test
+	public void whenChangeIsUnableToBeMadeNoPurchaseWillOccureWithExtraDimes() {
+		VendingMachine vendingMachine = new VendingMachine();
+		for (int i = 0; i < 3; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 4; i++)
+			vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.selectProduct(Product.COLA);
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
+		assertEquals(0, coinsReturned.size());
+		Map<Product, Integer> dispensedProducts = vendingMachine
+				.getDispensedProducts();
+		assertEquals(0, dispensedProducts.size());
+	}
 }
