@@ -11,6 +11,7 @@ public class VendingMachine {
 	private Map<Coin, Integer> coinReturn;
 	private Map<Coin, Integer> insertedCoins;
 	private Map<Product, Integer> dispensedProduct;
+	private Map<Product, Integer> productInventory;
 
 	private Map<Product, Double> productPrices;
 	private Map<Coin, Double> coinValue;
@@ -20,6 +21,7 @@ public class VendingMachine {
 	private boolean productPressed;
 	private double productPrice;
 	private boolean productPurchased;
+	private boolean productSoldOut;
 
 	public VendingMachine() {
 		coinReturn = new TreeMap<Coin, Integer>();
@@ -47,9 +49,15 @@ public class VendingMachine {
 		CoinListByDescendingValue.add(Coin.DIME);
 		CoinListByDescendingValue.add(Coin.NICKEL);
 		CoinListByDescendingValue.add(Coin.PENNY);
+
+		productInventory = new TreeMap<Product, Integer>();
 	}
 
 	public String getDisplay() {
+		if (productSoldOut) {
+			return "SOLD OUT";
+		}
+
 		if (productPurchased) {
 			productPurchased = false;
 			productPressed = false;
@@ -108,6 +116,11 @@ public class VendingMachine {
 
 		Map<Coin, Integer> coinsToBeReturned = new TreeMap<Coin, Integer>();
 
+		if (!productInventory.containsKey(product)) {
+			productSoldOut = true;
+			return;
+		}
+
 		productPressed = true;
 		productPrice = productPrices.get(product);
 		if (insertedCoinValue() >= productPrice) {
@@ -165,6 +178,16 @@ public class VendingMachine {
 				destination.put(c, destination.get(c) + origin.get(c));
 			else
 				destination.put(c, origin.get(c));
+		}
+	}
+
+	public void serviceProductInventory(Map<Product, Integer> newInventory) {
+		for (Product p : newInventory.keySet()) {
+			if (productInventory.containsKey(p))
+				productInventory.put(p,
+						productInventory.get(p) + newInventory.get(p));
+			else
+				productInventory.put(p, newInventory.get(p));
 		}
 	}
 }
