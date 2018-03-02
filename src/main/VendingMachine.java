@@ -145,7 +145,8 @@ public class VendingMachine {
 					insertedCoins.remove(Coin.DIME);
 			}
 
-			while (remainder >= (double) 0.05) {
+			while (remainder >= (double) 0.05
+					&& insertedCoins.containsKey(Coin.NICKEL)) {
 				remainder -= 0.05;
 				remainder = roundCents(remainder);
 				int coinReturnCount = 0;
@@ -154,9 +155,13 @@ public class VendingMachine {
 				coinReturn.put(Coin.NICKEL, coinReturnCount + 1);
 			}
 
-			productPurchased = true;
-			dispensedProduct.put(product, dispencedProductCount + 1);
-			insertedCoins.clear();
+			if (remainder == 0) {
+				productPurchased = true;
+				dispensedProduct.put(product, dispencedProductCount + 1);
+				insertedCoins.clear();
+			} else {
+
+			}
 		}
 	}
 

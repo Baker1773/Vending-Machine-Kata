@@ -582,4 +582,19 @@ public class VendingMachineTest {
 		assertEquals(3, (int) coinsReturned.get(Coin.DIME));
 		assertEquals(20, (int) coinsReturned.get(Coin.NICKEL));
 	}
+
+	@Test
+	public void whenChangeIsUnableToBeMadeNoPurchaseWillOccure() {
+		VendingMachine vendingMachine = new VendingMachine();
+		for (int i = 0; i < 3; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 3; i++)
+			vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.selectProduct(Product.COLA);
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
+		assertEquals(0, coinsReturned.size());
+		Map<Product, Integer> dispensedProducts = vendingMachine
+				.getDispensedProducts();
+		assertEquals(0, dispensedProducts.size());
+	}
 }
