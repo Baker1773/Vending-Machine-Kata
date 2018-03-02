@@ -531,12 +531,8 @@ public class VendingMachineTest {
 	@Test
 	public void returnsCorrectChangeAfterGivingTheMachine6Quarters1DimeAnd1NickleForACola() {
 		VendingMachine vendingMachine = new VendingMachine();
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 6; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.DIME);
 		vendingMachine.insertCoin(Coin.NICKEL);
 		vendingMachine.selectProduct(Product.COLA);
@@ -551,20 +547,8 @@ public class VendingMachineTest {
 	public void returnsCorrectChangeAfterGivingTheMachine1Quarter14DimeAnd2NickleForACola() {
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.insertCoin(Coin.QUARTER);
-		vendingMachine.insertCoin(Coin.DIME);
-		vendingMachine.insertCoin(Coin.DIME);
-		vendingMachine.insertCoin(Coin.DIME);
-		vendingMachine.insertCoin(Coin.DIME);
-		vendingMachine.insertCoin(Coin.DIME);
-		vendingMachine.insertCoin(Coin.DIME);
-		vendingMachine.insertCoin(Coin.DIME);
-		vendingMachine.insertCoin(Coin.DIME);
-		vendingMachine.insertCoin(Coin.DIME);
-		vendingMachine.insertCoin(Coin.DIME);
-		vendingMachine.insertCoin(Coin.DIME);
-		vendingMachine.insertCoin(Coin.DIME);
-		vendingMachine.insertCoin(Coin.DIME);
-		vendingMachine.insertCoin(Coin.DIME);
+		for (int i = 0; i < 14; i++)
+			vendingMachine.insertCoin(Coin.DIME);
 		vendingMachine.insertCoin(Coin.NICKEL);
 		vendingMachine.insertCoin(Coin.NICKEL);
 		vendingMachine.selectProduct(Product.COLA);
