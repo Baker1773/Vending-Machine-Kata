@@ -597,4 +597,16 @@ public class VendingMachineTest {
 				.getDispensedProducts();
 		assertEquals(0, dispensedProducts.size());
 	}
+
+	@Test
+	public void whenChangeIsUnableToBeMadeInsertedCoinsStayInMachine() {
+		VendingMachine vendingMachine = new VendingMachine();
+		for (int i = 0; i < 3; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
+		for (int i = 0; i < 3; i++)
+			vendingMachine.insertCoin(Coin.DIME);
+		vendingMachine.selectProduct(Product.COLA);
+		vendingMachine.getDisplay();
+		assertEquals("1.05", vendingMachine.getDisplay());
+	}
 }
