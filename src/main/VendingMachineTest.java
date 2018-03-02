@@ -646,4 +646,16 @@ public class VendingMachineTest {
 
 	}
 
+	@Test
+	public void vendingMachineWillReturnTwoNickelFromFirstPurchaseAsChangeForSecondPurachase() {
+		for (int i = 0; i < 20; i++)
+			vendingMachine.insertCoin(Coin.NICKEL);
+		vendingMachine.selectProduct(Product.COLA);
+		for (int i = 0; i < 3; i++)
+			vendingMachine.insertCoin(Coin.QUARTER);
+		vendingMachine.selectProduct(Product.CANDY);
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
+		assertEquals(1, coinsReturned.size());
+		assertEquals(2, (int) coinsReturned.get(Coin.NICKEL));
+	}
 }
