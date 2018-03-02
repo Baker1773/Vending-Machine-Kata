@@ -97,12 +97,7 @@ public class VendingMachine {
 	}
 
 	public void pressReturnCoinButton() {
-		for (Coin c : insertedCoins.keySet()) {
-			if (coinReturn.containsKey(c))
-				coinReturn.put(c, insertedCoins.get(c) + coinReturn.get(c));
-			else
-				coinReturn.put(c, insertedCoins.get(c));
-		}
+		moveAllCoinsFromOriginToDestination(insertedCoins, coinReturn);
 		insertedCoins.clear();
 	}
 
@@ -122,6 +117,7 @@ public class VendingMachine {
 			for (Coin coin : CoinListByDescendingValue) {
 				while (remainder >= coinValue.get(coin)
 						&& insertedCoins.containsKey(coin)) {
+
 					remainder = roundCents(remainder - coinValue.get(coin));
 					int coinReturnCount = 0;
 					if (coinsToBeReturned.containsKey(coin))
@@ -140,22 +136,12 @@ public class VendingMachine {
 			if (remainder == 0) {
 				productPurchased = true;
 				dispensedProduct.put(product, dispencedProductCount + 1);
-				for (Coin c : coinsToBeReturned.keySet()) {
-					if (coinReturn.containsKey(c))
-						coinReturn.put(c,
-								coinReturn.get(c) + coinsToBeReturned.get(c));
-					else
-						coinReturn.put(c, coinsToBeReturned.get(c));
-				}
+				moveAllCoinsFromOriginToDestination(coinsToBeReturned,
+						coinReturn);
 				insertedCoins.clear();
 			} else {
-				for (Coin c : coinsToBeReturned.keySet()) {
-					if (insertedCoins.containsKey(c))
-						insertedCoins.put(c, insertedCoins.get(c)
-								+ coinsToBeReturned.get(c));
-					else
-						insertedCoins.put(c, coinsToBeReturned.get(c));
-				}
+				moveAllCoinsFromOriginToDestination(coinsToBeReturned,
+						insertedCoins);
 			}
 		}
 	}
@@ -171,4 +157,14 @@ public class VendingMachine {
 		return retreivedProducts;
 	}
 
+	private void moveAllCoinsFromOriginToDestination(Map<Coin, Integer> origin,
+			Map<Coin, Integer> destination) {
+
+		for (Coin c : origin.keySet()) {
+			if (destination.containsKey(c))
+				destination.put(c, destination.get(c) + origin.get(c));
+			else
+				destination.put(c, origin.get(c));
+		}
+	}
 }
