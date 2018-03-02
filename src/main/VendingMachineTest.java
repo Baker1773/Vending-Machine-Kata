@@ -557,4 +557,15 @@ public class VendingMachineTest {
 		assertEquals(1, (int) coinsReturned.get(Coin.QUARTER));
 		assertEquals(5, (int) coinsReturned.get(Coin.DIME));
 	}
+
+	@Test
+	public void returnsCorrectChangeAfterGivingTheMachine40NickleForACola() {
+		VendingMachine vendingMachine = new VendingMachine();
+		for (int i = 0; i < 40; i++)
+			vendingMachine.insertCoin(Coin.NICKEL);
+		vendingMachine.selectProduct(Product.COLA);
+		Map<Coin, Integer> coinsReturned = vendingMachine.emptyCoinReturn();
+		assertEquals(1, coinsReturned.size());
+		assertEquals(20, (int) coinsReturned.get(Coin.NICKEL));
+	}
 }
