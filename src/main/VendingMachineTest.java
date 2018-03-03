@@ -778,4 +778,12 @@ public class VendingMachineTest {
 		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 	}
+
+	@Test
+	public void vendingMachineWillShowExactChangeOnlyIfOnly1DimeIsInserted() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.DIME, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+		assertEquals("EXACT CHANGE ONLY", vendingMachine.getDisplay());
+	}
 }
