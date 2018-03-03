@@ -1,14 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="main.VendingMachineTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2018-02-28T14:52:24" hostname="Brent-PC" time="0.003">
+<testsuite name="main.VendingMachineTest" tests="68" skipped="0" failures="0" errors="0" timestamp="2018-03-03T20:03:59" hostname="Brent-PC" time="0.011">
   <properties/>
+  <testcase name="selectColaWithNoMoneyInTheVendingMachineWillDisplayThePrice" classname="main.VendingMachineTest" time="0.002"/>
   <testcase name="vendingMachineAcceptsMultipleQuartersByDisplayingCurrentAmount" classname="main.VendingMachineTest" time="0.001"/>
   <testcase name="whenNoCoinsAreInsertedVendingMachinedisplaysINSERTCOIN" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="pressingTheReturnCoinsButtonTwiceInARowWillOnlyReturnTheCoinsOnce" classname="main.VendingMachineTest" time="0.0"/>
   <testcase name="vendingMachineDoesNotAcceptPennyWhenNoOtherCoinsAreInserted" classname="main.VendingMachineTest" time="0.0"/>
-  <testcase name="vendingMachineDoesNotAcceptPennyWhenOtherCoinsAreInserted" classname="main.VendingMachineTest" time="0.001"/>
+  <testcase name="returnsCorrectChangeAfterGivingTheMachine1Quarter14DimeAnd2NickleForACola" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="checkingTheDisplayAfterThePriceForColaIsDisplayedWillDisplayInsertCoin" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="pressingTheReturnButtonWillReturnMultipleCoins" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineWillNotShowExactChangeOnlyWith1NickelAnd1DimeAlreadyInside" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="afterDisplayingThankYouTheVendingMachineWillShowInsertCoinAgain" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="insertingAQuarterThenReturningAndEmpyingTheCoinReturnTwiceWillEndUpWithOneQuarterEachTime" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="afterPurchasingACandyACandyIsInTheDispenser" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineWillFailToMakeChangeAfterBeingLoadedWithTheWrongTypeOfCoinsToMakeChange" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="pressingCandyWithExactChangeWillResultInTheDisplaySayingThankYou" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="whenChangeIsUnableToBeMadeNoPurchaseWillOccure" classname="main.VendingMachineTest" time="0.001"/>
+  <testcase name="checkingTheDisplayWithSomeMoneyButInsufficientMoneyForAProduct" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="whenChangeIsUnableToBeMadeNoPurchaseWillOccureWithExtraDimes" classname="main.VendingMachineTest" time="0.001"/>
+  <testcase name="vendingMachineWillNotDispenceAProductWhenProductIsOutOfStock" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="selectCandyWithNoMoneyInTheVendingMachineWillDisplayThePrice" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineWillReturnANickelFromFirstPurchaseAsChangeForSecondPurachase" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="whenChangeIsUnableToBeMadeInsertedCoinsStayInMachine" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineDoesNotAcceptPennyWhenOtherCoinsAreInserted" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="returnsCorrectChangeAfterGivingTheMachine4QuartersAndADimeForACola" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="afterPurchasingAChipsAChipsIsInTheDispenser" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="pressingChipsWithExactChangeWillResultInTheDisplaySayingThankYou" classname="main.VendingMachineTest" time="0.001"/>
+  <testcase name="whenCoinReturnIsCheckedItIsEmptied" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineWillShowExactChangeOnlyIfOnly1DimeIsInserted" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="afterDisplayingThankYouForChipsTheVendingMachineWillShowInsertCoinAgain" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="insertingAQuarterThenPressingTheReturnButtonWillResetTheDisplay" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineWillReturnTwoNickelFromFirstPurchaseAsChangeForSecondPurachase" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="whenTwoPenniesAreInsertedBothAreInTheCoinReturn" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="returnsCorrectChangeAfterGivingTheMachine6Quarters1DimeAnd1NickleForACola" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="returnsCorrectChangeAfterGivingTheMachine4QuartersAndANickleForACola" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="givingTheMachine14QuartersAnd9DimesForACola" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="whenANickelIsPreloadedIntoTheMachineAnd3QuartersAnd3DimesAreUsedToBuyAColaANickelIsReturned" classname="main.VendingMachineTest" time="0.001"/>
+  <testcase name="afterDisplayingThankYouForCandyTheVendingMachineWillShowInsertCoinAgain" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="insertingAQuarterPressingReturnAndInsertertingAnotherQuarterAndPressingReturnWillResultInTwoQuartersInTheCoinReturn" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="afterPurchasingAColaAColaIsInTheDispenser" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="onlyOneColaCanBePurchasedIfTheMachineHasOneCola" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="insertingAQuarterThenPressingTheReturnButtonWillReturnAQuarter" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="returnAQuarterAfterGivingTheMachine5QuartersForACola" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="checkingTheDisplayAfterThePriceForCandyIsDisplayedWillDisplayInsertCoin" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="newVendingMachinesWillHaveAnEmptyCoinReturn" classname="main.VendingMachineTest" time="0.0"/>
   <testcase name="vendingMachineAcceptsNickelByDisplayingCurrentAmount" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="checkingTheDisplayAfterThePriceForChipsIsDisplayedWillDisplayInsertCoin" classname="main.VendingMachineTest" time="0.001"/>
+  <testcase name="returnsCorrectChangeAfterGivingTheMachine40NickleForACola" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineWillShowExactChangeOnlyIfOnly1NickelIsInserted" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="newVendingMachinesHaveNothingInTheDispenser" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="returnsCorrectChangeAfterGivingTheMachine5QuartersAndANickleForACola" classname="main.VendingMachineTest" time="0.0"/>
   <testcase name="vendingMachineAcceptsMultipleNickelsByDisplayingCurrentAmount" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="selectChipsWithNoMoneyInTheVendingMachineWillDisplayThePrice" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="whenAPennyIsRejectedItIsPlacedInTheCoinReturn" classname="main.VendingMachineTest" time="0.0"/>
   <testcase name="vendingMachineAcceptsDimeByDisplayingCurrentAmount" classname="main.VendingMachineTest" time="0.0"/>
-  <testcase name="vendingMachineAcceptsMultipleDimesByDisplayingCurrentAmount" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="whenPurchasingAProductWithToMuchMoneyTheMachineWillDisplayThankYouThenInsertCoins" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineAcceptsMultipleDimesByDisplayingCurrentAmount" classname="main.VendingMachineTest" time="0.001"/>
+  <testcase name="coinsReturnedFromCoinReturnButtonWillCombineWithRejectedPennies" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="returnsCorrectChangeAfterGivingTheMachine40NickleAnd3DimeForACola" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="pressingColaWithExactChangeWillResultInTheDisplaySayingThankYou" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineWillNoCoinsAlreadyInsertedWillDisplayExactChangeOnlyInsteadOfInsertCoin" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="afterDisplayingSoldOutDisplayWillGoBackToInsertCoinOnAMachineWithNoCoinsInserted" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="productsNotPurchasedWillNotBeDispensed" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="whenPurchasingAProductWithToMuchMoneyTheMachineWillDispenceTheProduct" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineWillNotShowExactChangeOnlyWith2NickelsAlreadyInside" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="afterGettingProductsFromTheDispenserTheDispenserIsEmpty" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="afterDisplayingSoldOutDisplayWillGoBackToCoinAmountOnAMachineWithCoinsInserted" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineWillShowSoldOutWhenAttemptingToPurchaseAColaAndColaIsSoldOut" classname="main.VendingMachineTest" time="0.0"/>
+  <testcase name="afterPurchasingTwoColasThereAreTwoColasInTheDispenser" classname="main.VendingMachineTest" time="0.0"/>
   <testcase name="vendingMachineAcceptsQuarterByDisplayingCurrentAmount" classname="main.VendingMachineTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
