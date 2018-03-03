@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -113,9 +114,6 @@ public class VendingMachine {
 	}
 
 	public void selectProduct(Product product) {
-		int dispencedProductCount = 0;
-		if (dispensedProduct.containsKey(product))
-			dispencedProductCount = dispensedProduct.get(product);
 
 		Map<Coin, Integer> coinsToBeReturned = new TreeMap<Coin, Integer>();
 
@@ -130,46 +128,14 @@ public class VendingMachine {
 			double remainder = insertedCoinValue() - productPrice;
 			remainder = roundCents(remainder);
 
-			for (Coin coin : CoinListByDescendingValue) {
-				while (remainder >= coinValue.get(coin)
-						&& insertedCoins.containsKey(coin)) {
+			remainder = generateChange(CoinListByDescendingValue,
+					insertedCoins, coinsToBeReturned, remainder);
 
-					remainder = roundCents(remainder - coinValue.get(coin));
-					int coinReturnCount = 0;
-					if (coinsToBeReturned.containsKey(coin))
-						coinReturnCount = coinsToBeReturned.get(coin);
-					coinsToBeReturned.put(coin, coinReturnCount + 1);
-
-					int coinInsertedCount = insertedCoins.get(coin);
-					coinInsertedCount--;
-					if (coinInsertedCount > 0)
-						insertedCoins.put(coin, coinInsertedCount);
-					else
-						insertedCoins.remove(coin);
-				}
-			}
 			if (remainder != 0) {
 				Map<Coin, Integer> coinsReturnedFromInventory = new TreeMap<Coin, Integer>();
-				for (Coin coin : CoinListByDescendingValue) {
-					while (remainder >= coinValue.get(coin)
-							&& coinInventory.containsKey(coin)) {
 
-						remainder = roundCents(remainder - coinValue.get(coin));
-						int coinReturnCount = 0;
-						if (coinsReturnedFromInventory.containsKey(coin))
-							coinReturnCount = coinsReturnedFromInventory
-									.get(coin);
-						coinsReturnedFromInventory.put(coin,
-								coinReturnCount + 1);
-
-						int coinInsertedCount = coinInventory.get(coin);
-						coinInsertedCount--;
-						if (coinInsertedCount > 0)
-							coinInventory.put(coin, coinInsertedCount);
-						else
-							coinInventory.remove(coin);
-					}
-				}
+				remainder = generateChange(CoinListByDescendingValue,
+						coinInventory, coinsReturnedFromInventory, remainder);
 
 				if (remainder != 0) {
 					moveAllCoinsFromOriginToDestination(
@@ -189,49 +155,65 @@ public class VendingMachine {
 				remainder = insertedCoinValue() - productPrice;
 				remainder = roundCents(remainder);
 
-				int index = CoinListByDescendingValue.size() - 1;
-				for (; index >= 0; index--) {
-					Coin coin = CoinListByDescendingValue.get(index);
-					while (remainder >= coinValue.get(coin)
-							&& insertedCoins.containsKey(coin)) {
-
-						remainder = roundCents(remainder - coinValue.get(coin));
-						int coinReturnCount = 0;
-						if (coinsToBeReturned.containsKey(coin))
-							coinReturnCount = coinsToBeReturned.get(coin);
-						coinsToBeReturned.put(coin, coinReturnCount + 1);
-
-						int coinInsertedCount = insertedCoins.get(coin);
-						coinInsertedCount--;
-						if (coinInsertedCount > 0)
-							insertedCoins.put(coin, coinInsertedCount);
-						else
-							insertedCoins.remove(coin);
-					}
-				}
+				Collections.reverse(CoinListByDescendingValue);
+				remainder = generateChange(CoinListByDescendingValue,
+						insertedCoins, coinsToBeReturned, remainder);
+				Collections.reverse(CoinListByDescendingValue);
 			}
 
 			if (remainder == 0) {
-				productPurchased = true;
-				dispensedProduct.put(product, dispencedProductCount + 1);
+				purchasedProduct(product, coinsToBeReturned);
 
-				int productCount = productInventory.get(product);
-				productCount--;
-				if (productCount > 0)
-					productInventory.put(product, productCount);
-				else
-					productInventory.remove(product);
-
-				moveAllCoinsFromOriginToDestination(coinsToBeReturned,
-						coinReturn);
-				moveAllCoinsFromOriginToDestination(insertedCoins,
-						coinInventory);
-				insertedCoins.clear();
 			} else {
 				moveAllCoinsFromOriginToDestination(coinsToBeReturned,
 						insertedCoins);
 			}
 		}
+	}
+
+	private void purchasedProduct(Product product,
+			Map<Coin, Integer> coinsToBeReturned) {
+		productPurchased = true;
+		int dispencedProductCount = 0;
+		if (dispensedProduct.containsKey(product))
+			dispencedProductCount = dispensedProduct.get(product);
+		dispensedProduct.put(product, dispencedProductCount + 1);
+
+		int productCount = productInventory.get(product);
+		productCount--;
+		if (productCount > 0)
+			productInventory.put(product, productCount);
+		else
+			productInventory.remove(product);
+
+		moveAllCoinsFromOriginToDestination(coinsToBeReturned, coinReturn);
+		moveAllCoinsFromOriginToDestination(insertedCoins, coinInventory);
+		insertedCoins.clear();
+	}
+
+	private double generateChange(ArrayList<Coin> orderedCoinList,
+			Map<Coin, Integer> coinSource, Map<Coin, Integer> coinsToReturned,
+			double remainder) {
+
+		for (Coin coin : orderedCoinList) {
+			while (remainder >= coinValue.get(coin)
+					&& coinSource.containsKey(coin)) {
+
+				remainder = roundCents(remainder - coinValue.get(coin));
+				int coinReturnCount = 0;
+				if (coinsToReturned.containsKey(coin))
+					coinReturnCount = coinsToReturned.get(coin);
+				coinsToReturned.put(coin, coinReturnCount + 1);
+
+				int coinInsertedCount = coinSource.get(coin);
+				coinInsertedCount--;
+				if (coinInsertedCount > 0)
+					coinSource.put(coin, coinInsertedCount);
+				else
+					coinSource.remove(coin);
+			}
+		}
+		return remainder;
 	}
 
 	private double roundCents(double cents) {
