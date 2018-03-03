@@ -24,6 +24,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void whenNoCoinsAreInsertedVendingMachinedisplaysINSERTCOIN() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 	}
 
@@ -71,6 +75,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void vendingMachineDoesNotAcceptPennyWhenNoOtherCoinsAreInserted() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		vendingMachine.insertCoin(Coin.PENNY);
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 	}
@@ -160,6 +168,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void insertingAQuarterThenPressingTheReturnButtonWillResetTheDisplay() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.pressReturnCoinButton();
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
@@ -202,6 +214,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void selectColaWithNoMoneyInTheVendingMachineWillDisplayThePrice() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.selectProduct(Product.COLA);
 		assertEquals("PRICE $1.00", vendingMachine.getDisplay());
@@ -209,6 +225,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void checkingTheDisplayAfterThePriceForColaIsDisplayedWillDisplayInsertCoin() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.selectProduct(Product.COLA);
 		assertEquals("PRICE $1.00", vendingMachine.getDisplay());
@@ -217,6 +237,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void selectChipsWithNoMoneyInTheVendingMachineWillDisplayThePrice() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.selectProduct(Product.CHIPS);
 		assertEquals("PRICE $0.50", vendingMachine.getDisplay());
@@ -224,6 +248,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void checkingTheDisplayAfterThePriceForChipsIsDisplayedWillDisplayInsertCoin() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.selectProduct(Product.CHIPS);
 		assertEquals("PRICE $0.50", vendingMachine.getDisplay());
@@ -232,6 +260,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void selectCandyWithNoMoneyInTheVendingMachineWillDisplayThePrice() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.selectProduct(Product.CANDY);
 		assertEquals("PRICE $0.65", vendingMachine.getDisplay());
@@ -239,6 +271,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void checkingTheDisplayAfterThePriceForCandyIsDisplayedWillDisplayInsertCoin() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.selectProduct(Product.CANDY);
 		assertEquals("PRICE $0.65", vendingMachine.getDisplay());
@@ -247,6 +283,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void checkingTheDisplayWithSomeMoneyButInsufficientMoneyForAProduct() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.CANDY);
@@ -256,6 +296,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void pressingColaWithExactChangeWillResultInTheDisplaySayingThankYou() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		for (int i = 0; i < 4; i++)
 			vendingMachine.insertCoin(Coin.QUARTER);
@@ -265,6 +309,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void afterDisplayingThankYouTheVendingMachineWillShowInsertCoinAgain() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		for (int i = 0; i < 4; i++)
 			vendingMachine.insertCoin(Coin.QUARTER);
@@ -275,6 +323,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void pressingChipsWithExactChangeWillResultInTheDisplaySayingThankYou() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
@@ -284,6 +336,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void pressingCandyWithExactChangeWillResultInTheDisplaySayingThankYou() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
@@ -366,6 +422,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void afterDisplayingThankYouForChipsTheVendingMachineWillShowInsertCoinAgain() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
@@ -376,6 +436,10 @@ public class VendingMachineTest {
 
 	@Test
 	public void afterDisplayingThankYouForCandyTheVendingMachineWillShowInsertCoinAgain() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 		vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.insertCoin(Coin.QUARTER);
@@ -408,10 +472,14 @@ public class VendingMachineTest {
 
 	@Test
 	public void whenPurchasingAProductWithToMuchMoneyTheMachineWillDisplayThankYouThenInsertCoins() {
+
 		for (int i = 0; i < 5; i++)
 			vendingMachine.insertCoin(Coin.QUARTER);
 		vendingMachine.selectProduct(Product.COLA);
 		assertEquals("THANK YOU", vendingMachine.getDisplay());
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 	}
 
@@ -567,6 +635,11 @@ public class VendingMachineTest {
 	@Test
 	public void afterDisplayingSoldOutDisplayWillGoBackToInsertCoinOnAMachineWithNoCoinsInserted() {
 		vendingMachine = new VendingMachine();
+
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+
 		vendingMachine.selectProduct(Product.COLA);
 		assertEquals("SOLD OUT", vendingMachine.getDisplay());
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
@@ -674,5 +747,10 @@ public class VendingMachineTest {
 		Map<Product, Integer> dispensedProducts = vendingMachine
 				.getDispensedProducts();
 		assertEquals(0, dispensedProducts.size());
+	}
+
+	@Test
+	public void vendingMachineWillNoCoinsAlreadyInsertedWillDisplayExactChangeOnlyInsteadOfInsertCoin() {
+		assertEquals("EXACT CHANGE ONLY", vendingMachine.getDisplay());
 	}
 }

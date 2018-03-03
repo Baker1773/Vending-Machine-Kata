@@ -88,7 +88,13 @@ public class VendingMachine {
 
 		if (insertedCoinValue() != 0)
 			return String.format("%.2f", insertedCoinValue());
+		if (needsExactChange())
+			return "EXACT CHANGE ONLY";
 		return "INSERT COIN";
+	}
+
+	private boolean needsExactChange() {
+		return !coinInventory.containsKey(Coin.NICKEL);
 	}
 
 	private double insertedCoinValue() {
