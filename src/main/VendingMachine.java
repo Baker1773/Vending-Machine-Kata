@@ -141,6 +141,12 @@ public class VendingMachine {
 	public void selectProduct(Product product) {
 
 		Map<Coin, Integer> coinsToBeReturned = new TreeMap<Coin, Integer>();
+		Map<Coin, Integer> insertedCoinsAndCoinInventoryJoined = new TreeMap<Coin, Integer>();
+
+		moveAllCoinsFromOriginToDestination(insertedCoins,
+				insertedCoinsAndCoinInventoryJoined);
+		moveAllCoinsFromOriginToDestination(coinInventory,
+				insertedCoinsAndCoinInventoryJoined);
 
 		if (!productInventory.containsKey(product)) {
 			productSoldOut = true;
@@ -150,48 +156,31 @@ public class VendingMachine {
 		productPressed = true;
 		productPrice = productPrices.get(product);
 		if (insertedCoinValue() >= productPrice) {
-			double remainder = insertedCoinValue() - productPrice;
-			remainder = roundCents(remainder);
+			double remainder = roundCents(insertedCoinValue() - productPrice);
 
 			remainder = generateChange(CoinListByDescendingValue,
-					insertedCoins, coinsToBeReturned, remainder);
+					insertedCoinsAndCoinInventoryJoined, coinsToBeReturned,
+					remainder);
 
 			if (remainder != 0) {
-				Map<Coin, Integer> coinsReturnedFromInventory = new TreeMap<Coin, Integer>();
 
-				remainder = generateChange(CoinListByDescendingValue,
-						coinInventory, coinsReturnedFromInventory, remainder);
+				remainder = roundCents(insertedCoinValue() - productPrice);
 
-				if (remainder != 0) {
-					moveAllCoinsFromOriginToDestination(
-							coinsReturnedFromInventory, coinInventory);
-					coinsReturnedFromInventory.clear();
-				} else {
-					moveAllCoinsFromOriginToDestination(
-							coinsReturnedFromInventory, coinsToBeReturned);
-				}
-
-			}
-			if (remainder != 0) {
 				moveAllCoinsFromOriginToDestination(coinsToBeReturned,
-						insertedCoins);
+						insertedCoinsAndCoinInventoryJoined);
 				coinsToBeReturned.clear();
-
-				remainder = insertedCoinValue() - productPrice;
-				remainder = roundCents(remainder);
 
 				Collections.reverse(CoinListByDescendingValue);
 				remainder = generateChange(CoinListByDescendingValue,
-						insertedCoins, coinsToBeReturned, remainder);
+						insertedCoinsAndCoinInventoryJoined, coinsToBeReturned,
+						remainder);
 				Collections.reverse(CoinListByDescendingValue);
 			}
 
 			if (remainder == 0) {
 				purchasedProduct(product, coinsToBeReturned);
+				coinInventory = insertedCoinsAndCoinInventoryJoined;
 
-			} else {
-				moveAllCoinsFromOriginToDestination(coinsToBeReturned,
-						insertedCoins);
 			}
 		}
 	}
@@ -212,7 +201,6 @@ public class VendingMachine {
 			productInventory.remove(product);
 
 		moveAllCoinsFromOriginToDestination(coinsToBeReturned, coinReturn);
-		moveAllCoinsFromOriginToDestination(insertedCoins, coinInventory);
 		insertedCoins.clear();
 	}
 
