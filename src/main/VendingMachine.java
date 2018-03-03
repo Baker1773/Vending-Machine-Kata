@@ -30,30 +30,43 @@ public class VendingMachine {
 		insertedCoins = new TreeMap<Coin, Integer>();
 		dispensedProduct = new TreeMap<Product, Integer>();
 
+		setUpProductPrices();
+		setUpCoinValue();
+		setUpAcceptedCoins();
+		setUpCoinListByDescendingValue();
+
+		productInventory = new TreeMap<Product, Integer>();
+		coinInventory = new TreeMap<Coin, Integer>();
+	}
+
+	private void setUpProductPrices() {
 		productPrices = new TreeMap<Product, Double>();
 		productPrices.put(Product.COLA, (double) 1);
 		productPrices.put(Product.CHIPS, 0.5);
 		productPrices.put(Product.CANDY, (double) 0.65);
+	}
 
+	private void setUpCoinValue() {
 		coinValue = new TreeMap<Coin, Double>();
 		coinValue.put(Coin.PENNY, 0.01);
 		coinValue.put(Coin.NICKEL, 0.05);
 		coinValue.put(Coin.DIME, 0.10);
 		coinValue.put(Coin.QUARTER, 0.25);
+	}
 
+	private void setUpAcceptedCoins() {
 		acceptedCoins = new TreeSet<Coin>();
 		acceptedCoins.add(Coin.NICKEL);
 		acceptedCoins.add(Coin.DIME);
 		acceptedCoins.add(Coin.QUARTER);
+	}
 
+	private void setUpCoinListByDescendingValue() {
 		CoinListByDescendingValue = new ArrayList<Coin>();
 		CoinListByDescendingValue.add(Coin.QUARTER);
 		CoinListByDescendingValue.add(Coin.DIME);
 		CoinListByDescendingValue.add(Coin.NICKEL);
 		CoinListByDescendingValue.add(Coin.PENNY);
-
-		productInventory = new TreeMap<Product, Integer>();
-		coinInventory = new TreeMap<Coin, Integer>();
 	}
 
 	public String getDisplay() {
