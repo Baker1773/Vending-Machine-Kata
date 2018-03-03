@@ -97,6 +97,8 @@ public class VendingMachine {
 		boolean exactChangeNeeded = true;
 		if (coinInventory.containsKey(Coin.NICKEL)) {
 			exactChangeNeeded = !(coinInventory.get(Coin.NICKEL) > 1);
+			if (exactChangeNeeded)
+				exactChangeNeeded = !(coinInventory.containsKey(Coin.DIME));
 		}
 		return exactChangeNeeded;
 	}

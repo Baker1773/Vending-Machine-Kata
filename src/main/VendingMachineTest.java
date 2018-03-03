@@ -769,4 +769,13 @@ public class VendingMachineTest {
 		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 	}
+
+	@Test
+	public void vendingMachineWillNotShowExactChangeOnlyWith1NickelAnd1DimeAlreadyInside() {
+		TreeMap<Coin, Integer> coinInventoryToAdd = new TreeMap<Coin, Integer>();
+		coinInventoryToAdd.put(Coin.NICKEL, 1);
+		coinInventoryToAdd.put(Coin.DIME, 1);
+		vendingMachine.serviceCoinInventory(coinInventoryToAdd);
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+	}
 }
