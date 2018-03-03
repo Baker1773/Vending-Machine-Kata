@@ -20,12 +20,12 @@ public class VendingMachine {
 	private ArrayList<Coin> CoinListByDescendingValue;
 	private Set<Coin> acceptedCoins;
 
-	private boolean productPressed;
+	private VendingMachineState vendingMachineState;
 	private double productPrice;
-	private boolean productPurchased;
-	private boolean productSoldOut;
 
 	public VendingMachine() {
+		vendingMachineState = VendingMachineState.NORMAL_STATE;
+
 		coinReturn = new TreeMap<Coin, Integer>();
 		insertedCoins = new TreeMap<Coin, Integer>();
 		dispensedProduct = new TreeMap<Product, Integer>();
@@ -70,27 +70,32 @@ public class VendingMachine {
 	}
 
 	public String getDisplay() {
-		if (productSoldOut) {
-			productSoldOut = false;
-			return "SOLD OUT";
+		String display;
+
+		switch (vendingMachineState) {
+		case PRODUCT_SOLDOUT:
+			vendingMachineState = VendingMachineState.NORMAL_STATE;
+			display = "SOLD OUT";
+			break;
+		case PRODUCT_PURCHASED:
+			vendingMachineState = VendingMachineState.NORMAL_STATE;
+			display = "THANK YOU";
+			break;
+		case PRODUCT_PRESSED:
+			vendingMachineState = VendingMachineState.NORMAL_STATE;
+			display = "PRICE $" + String.format("%.2f", productPrice);
+			break;
+		default:
+			if (insertedCoinValue() != 0)
+				display = String.format("%.2f", insertedCoinValue());
+			else if (needsExactChange())
+				display = "EXACT CHANGE ONLY";
+			else
+				display = "INSERT COIN";
+			break;
 		}
 
-		if (productPurchased) {
-			productPurchased = false;
-			productPressed = false;
-			return "THANK YOU";
-		}
-
-		if (productPressed) {
-			productPressed = false;
-			return "PRICE $" + String.format("%.2f", productPrice);
-		}
-
-		if (insertedCoinValue() != 0)
-			return String.format("%.2f", insertedCoinValue());
-		if (needsExactChange())
-			return "EXACT CHANGE ONLY";
-		return "INSERT COIN";
+		return display;
 	}
 
 	private boolean needsExactChange() {
@@ -149,11 +154,11 @@ public class VendingMachine {
 				insertedCoinsAndCoinInventoryJoined);
 
 		if (!productInventory.containsKey(product)) {
-			productSoldOut = true;
+			vendingMachineState = VendingMachineState.PRODUCT_SOLDOUT;
 			return;
 		}
 
-		productPressed = true;
+		vendingMachineState = VendingMachineState.PRODUCT_PRESSED;
 		productPrice = productPrices.get(product);
 		if (insertedCoinValue() >= productPrice) {
 			double remainder = roundCents(insertedCoinValue() - productPrice);
@@ -187,7 +192,7 @@ public class VendingMachine {
 
 	private void purchasedProduct(Product product,
 			Map<Coin, Integer> coinsToBeReturned) {
-		productPurchased = true;
+		vendingMachineState = VendingMachineState.PRODUCT_PURCHASED;
 		int dispencedProductCount = 0;
 		if (dispensedProduct.containsKey(product))
 			dispencedProductCount = dispensedProduct.get(product);
